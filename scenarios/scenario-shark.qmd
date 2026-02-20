@@ -5,7 +5,7 @@ title: "Sharknado!"
 You are an analyst for an insurance agency concerned with increasing payouts for property damage with a warming climate. 
 Your boss recently saw Sharknado (2013) while trying to battle insomnia, and has become concerned about the increased likelihood of shark-infested weather as severe weather events become more probable due to climate change. 
 
-Your boss's  concerns about the possiblity of shark-infested storms cannot be countered with logic, but you might be able to convince them that very few storms even have shark-infestation potential. 
+Your boss's  concerns about the possiblity of shark-infested storms cannot be countered with logic, but you might be able to convince them that very few storms even have shark-infestation potential.
 
 
 Assemble data from one or more reputable sources (NOAA, USGS, etc.).  

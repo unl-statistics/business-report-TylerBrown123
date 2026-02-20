@@ -1,3 +1,106 @@
 ---
 title: "Draft: Data Documentation"
 ---
+https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf
+```{r, message = FALSE}
+library(tidyverse)
+
+tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv")
+
+tornado_data <- tornado_full_data |>
+  select(yr, date, st, mag, slat, slon, elat, elon, len, wid, ns, sn, sg)
+
+tornado_data_counted_once <- tornado_data |>
+  filter(sn == 0) |>
+  select(-ns,-sn,-sg) |>
+  arrange(date)
+```
+
+```{r, echo = FALSE}
+tornado_vars <- data.frame(
+  Variable = c("yr", "date", "st", "mag", "slat", "slon", "elat", "elon", "len", "wid"),
+  Description = c(
+    "Year Tornado Occurred",
+    "Exact Date Tornado Occurred",
+    "State Abbreviation Where Tornado First Touched Down",
+    "EF Scale Magnitude of the Tornado",
+    "Latitude Where the Tornado First Touched Down",
+    "Longitude Where the Tornado First Touched Down",
+    "Latitude Where the Tornado Ended",
+    "Longitude Where the Tornado Ended",
+    "Tornado Path Length (Miles)",
+    "Tornado Path Width (Yards)"
+  ),
+  Type = c("Integer", "Date", "Categorical", "Integer", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric"),
+  Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
+)
+```
+
+```{r, echo = FALSE}
+library(gt)
+
+tornado_vars %>%
+  gt() %>%
+  tab_header(
+    title = "Tornado Data Variable Descriptions"
+  ) %>%
+  cols_label(
+    Variable = "Variable Name",
+    Description = "Description",
+    Type = "Type",
+    Possible_Values = "Possible Values"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_body(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_column_labels(everything())
+  )
+
+```
+
+
+
+
+The data were collected by NOAA National Weather Prediction Service.
+
+The data was collected simply for the purpose of historical records and public safety, so that there can be research into these tornadoes.
+
+The data is about tornadoes, showing where they occur and how they travel.
+
+The data was collected from 1950-2024, and shows the date each tornado occurred as a column in the dataset.
+
+The data was collected all around the United States. This includes (potentially) all states.
+
+Reports from storm spotters and what the NWS considers reputable sources are submitted to the Storm Data publication by National Weather Service field offices.
+
+The data is a simple CSV file with each row representing one tornado and each column being a different descriptor of the tornado.
+
+The NOAA is a reputable known source for these types of data so there should be no data quality issues.
+
+Some suggested data analysis methods include probability estimation based on magnitude and/or distance travelled inland or towards the coast
+
+
+
+
+
+
+
+
+
+
+
