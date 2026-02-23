@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -229,7 +249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf</p>
+<p><span class="citation" data-cites="StormPredictionCenter"><span>“Storm Prediction Center Maps, Graphics, and Data Page”</span> (<a href="references.html#ref-StormPredictionCenter" role="doc-biblioref">n.d.</a>)</span></p>
+<hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -245,23 +266,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="ynercpsmab" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ynercpsmab table {
+<div id="afkdzrimqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#afkdzrimqt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ynercpsmab thead, #ynercpsmab tbody, #ynercpsmab tfoot, #ynercpsmab tr, #ynercpsmab td, #ynercpsmab th {
+#afkdzrimqt thead, #afkdzrimqt tbody, #afkdzrimqt tfoot, #afkdzrimqt tr, #afkdzrimqt td, #afkdzrimqt th {
   border-style: none;
 }
 
-#ynercpsmab p {
+#afkdzrimqt p {
   margin: 0;
   padding: 0;
 }
 
-#ynercpsmab .gt_table {
+#afkdzrimqt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -287,12 +308,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_caption {
+#afkdzrimqt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ynercpsmab .gt_title {
+#afkdzrimqt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -304,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ynercpsmab .gt_subtitle {
+#afkdzrimqt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -316,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ynercpsmab .gt_heading {
+#afkdzrimqt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -328,13 +349,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_bottom_border {
+#afkdzrimqt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_col_headings {
+#afkdzrimqt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -349,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_col_heading {
+#afkdzrimqt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -369,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ynercpsmab .gt_column_spanner_outer {
+#afkdzrimqt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -381,15 +402,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ynercpsmab .gt_column_spanner_outer:first-child {
+#afkdzrimqt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ynercpsmab .gt_column_spanner_outer:last-child {
+#afkdzrimqt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ynercpsmab .gt_column_spanner {
+#afkdzrimqt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -401,11 +422,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ynercpsmab .gt_spanner_row {
+#afkdzrimqt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ynercpsmab .gt_group_heading {
+#afkdzrimqt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -431,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ynercpsmab .gt_empty_group_heading {
+#afkdzrimqt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -446,15 +467,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ynercpsmab .gt_from_md > :first-child {
+#afkdzrimqt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ynercpsmab .gt_from_md > :last-child {
+#afkdzrimqt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ynercpsmab .gt_row {
+#afkdzrimqt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -473,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ynercpsmab .gt_stub {
+#afkdzrimqt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -486,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ynercpsmab .gt_stub_row_group {
+#afkdzrimqt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -500,15 +521,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ynercpsmab .gt_row_group_first td {
+#afkdzrimqt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ynercpsmab .gt_row_group_first th {
+#afkdzrimqt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ynercpsmab .gt_summary_row {
+#afkdzrimqt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -518,16 +539,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ynercpsmab .gt_first_summary_row {
+#afkdzrimqt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_first_summary_row.thick {
+#afkdzrimqt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ynercpsmab .gt_last_summary_row {
+#afkdzrimqt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,7 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_grand_summary_row {
+#afkdzrimqt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -547,7 +568,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ynercpsmab .gt_first_grand_summary_row {
+#afkdzrimqt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -557,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_last_grand_summary_row_top {
+#afkdzrimqt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -567,11 +588,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_striped {
+#afkdzrimqt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ynercpsmab .gt_table_body {
+#afkdzrimqt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -580,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_footnotes {
+#afkdzrimqt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -594,7 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_footnote {
+#afkdzrimqt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -603,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ynercpsmab .gt_sourcenotes {
+#afkdzrimqt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -617,7 +638,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ynercpsmab .gt_sourcenote {
+#afkdzrimqt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -625,72 +646,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ynercpsmab .gt_left {
+#afkdzrimqt .gt_left {
   text-align: left;
 }
 
-#ynercpsmab .gt_center {
+#afkdzrimqt .gt_center {
   text-align: center;
 }
 
-#ynercpsmab .gt_right {
+#afkdzrimqt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ynercpsmab .gt_font_normal {
+#afkdzrimqt .gt_font_normal {
   font-weight: normal;
 }
 
-#ynercpsmab .gt_font_bold {
+#afkdzrimqt .gt_font_bold {
   font-weight: bold;
 }
 
-#ynercpsmab .gt_font_italic {
+#afkdzrimqt .gt_font_italic {
   font-style: italic;
 }
 
-#ynercpsmab .gt_super {
+#afkdzrimqt .gt_super {
   font-size: 65%;
 }
 
-#ynercpsmab .gt_footnote_marks {
+#afkdzrimqt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ynercpsmab .gt_asterisk {
+#afkdzrimqt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ynercpsmab .gt_indent_1 {
+#afkdzrimqt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ynercpsmab .gt_indent_2 {
+#afkdzrimqt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ynercpsmab .gt_indent_3 {
+#afkdzrimqt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ynercpsmab .gt_indent_4 {
+#afkdzrimqt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ynercpsmab .gt_indent_5 {
+#afkdzrimqt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ynercpsmab .katex-display {
+#afkdzrimqt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ynercpsmab div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#afkdzrimqt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -783,8 +804,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The data is a simple CSV file with each row representing one tornado and each column being a different descriptor of the tornado.</p>
 <p>The NOAA is a reputable known source for these types of data so there should be no data quality issues.</p>
 <p>Some suggested data analysis methods include probability estimation based on magnitude and/or distance travelled inland or towards the coast</p>
+<p>https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-StormPredictionCenter" class="csl-entry" role="listitem">
+<span>“Storm Prediction Center Maps, Graphics, and Data Page.”</span> n.d. Accessed February 23, 2026. <a href="https://www.spc.noaa.gov/wcm/#data">https://www.spc.noaa.gov/wcm/#data</a>.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

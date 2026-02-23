@@ -1,7 +1,9 @@
 ---
 title: "Draft: Data Documentation"
 ---
-https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf
+
+@StormPredictionCenter
+---
 ```{r, message = FALSE}
 library(tidyverse)
 
@@ -95,6 +97,7 @@ The NOAA is a reputable known source for these types of data so there should be 
 Some suggested data analysis methods include probability estimation based on magnitude and/or distance travelled inland or towards the coast
 
 
+https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf
 
 
 
