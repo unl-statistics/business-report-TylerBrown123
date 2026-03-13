@@ -23,6 +23,58 @@ ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
   labs(title = "Tornado Start Locations with Missing End Coordinates",
        x = "Starting Longitude", y = "Starting Latitude") +
   theme_minimal()
+
+tornado_vars <- data.frame(
+  Variable = c("yr", "date", "st", "mag", "slat", "slon", "elat", "elon", "len", "wid"),
+  Description = c(
+    "Year Tornado Occurred",
+    "Exact Date Tornado Occurred",
+    "State Abbreviation Where Tornado First Touched Down",
+    "EF Scale Magnitude of the Tornado",
+    "Latitude Where the Tornado First Touched Down",
+    "Longitude Where the Tornado First Touched Down",
+    "Latitude Where the Tornado Ended",
+    "Longitude Where the Tornado Ended",
+    "Tornado Path Length (Miles)",
+    "Tornado Path Width (Yards)"
+  ),
+  Type = c("Integer", "Date", "Categorical", "Integer", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric"),
+  Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
+)
+
+library(gt)
+
+tornado_vars %>%
+  gt() %>%
+  tab_header(
+    title = "Tornado Data Variable Descriptions"
+  ) %>%
+  cols_label(
+    Variable = "Variable Name",
+    Description = "Description",
+    Type = "Type",
+    Possible_Values = "Possible Values"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_body(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_column_labels(everything())
+  )
 ```
 
 ```{r, message = FALSE, echo = FALSE}
