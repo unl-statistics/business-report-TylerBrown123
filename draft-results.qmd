@@ -2,3 +2,178 @@
 title: "Draft: Results"
 ---
 
+```{r, message = FALSE, echo = FALSE, output = FALSE}
+# Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
+library(tidyverse)
+
+tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv")
+
+tornado_paths <- tornado_full_data |>
+  distinct(slat, slon, elat, elon, .keep_all = TRUE)
+
+tornado_paths <- tornado_paths |>
+  select(slat, slon, elat, elon, mag)
+
+tornado_paths <- tornado_paths |>
+  mutate(end_missing = (elat == 0 | elon == 0))
+
+ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
+       aes(x = slon, y = slat)) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(title = "Tornado Start Locations with Missing End Coordinates",
+       x = "Starting Longitude", y = "Starting Latitude") +
+  theme_minimal()
+```
+
+```{r, message = FALSE, echo = FALSE}
+# Transforming latitude and longitude into math ready quantities
+library(rnaturalearth)
+library(sf)
+
+tornado_paths$start_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("slon", "slat"),
+  crs = 4269
+)$geometry
+
+tornado_paths$end_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("elon", "elat"),
+  crs = 4269
+)$geometry
+
+tornado_paths$start_geom_meters <- st_transform(
+  tornado_paths$start_geom_degrees, 5070
+)
+
+tornado_paths$end_geom_meters <- st_transform(
+  tornado_paths$end_geom_degrees, 5070
+)
+
+coast_m <- ne_coastline(returnclass = "sf") |> 
+  st_transform(5070)
+```
+
+These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.
+
+
+
+To examine the potential risk of a sharknado, we compute the probability of such an event occurring. From the perspective of any tornado occurring in the USA, this probability can be expressed as the product of several individual probabilities:
+$$
+P(\text{sharknado}) = 
+P(\text{shark is present}) \times 
+P(\text{tornado is coastal to inland}) \times 
+P(\text{tornado is strong enough to lift a shark})
+$$
+Alternatively, if we focus specifically on tornadoes that are coastal-to-inland, the probability of a sharknado occurring conditional on a tornado being coastal to inland can be expressed as:
+
+$$
+P(\text{sharknado | tornado is coastal to inland}) = 
+P(\text{shark is present}) \times 
+P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
+$$
+
+The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on the latter case.
+
+To obtain a very conservative upper estimate of this probability, we assume that the probability a shark is present is 100%. In other words, we assume that whenever a coastal to inland tornado occurs, a shark is present near the coast and available to be lifted. While this assumption is not necessarily realistic, it provides a conservative upper bound on the probability of a sharknado. This will strengthen the evidence when the probability of a sharknado is still quite low. 
+
+```{r, echo = FALSE}
+# Find distances to coast and classify each tornado as coastal_to_inland , inland_to_coastal , or other
+tornado_paths <- tornado_paths |>
+  mutate(
+    dist_start_to_coast = st_distance(start_geom_meters, coast_m) |> apply(1, min),
+    dist_end_to_coast = st_distance(end_geom_meters, coast_m) |> apply(1, min)
+  )
+
+tornado_paths <- tornado_paths |> 
+  mutate(  
+    movement = case_when(  
+      dist_start_to_coast <= 10000 & dist_end_to_coast > dist_start_to_coast ~ "Coastal_to_Inland",  
+      dist_start_to_coast > 10000 & dist_end_to_coast < dist_start_to_coast ~ "Inland_to_Coastal",  
+      TRUE ~ "Other"  
+    )  
+  )
+```
+
+To start, we must classify each tornado as being coastal to inland, inland to coastal, or neither. This could be done as just coastal to inland or not coastal to inland, but for thoroughness, we included another group for inland to coastal as well to compare.
+
+The threshold used to decide upon "coastal to inland" was if the starting distance of the tornado was within 10000 meters of the closest coast and the ending distance of the tornado was further from the closest coast than the starting distance was. Likewise, tornadoes were classified into the "inland to coastal" group if they were more than 10000 meters from the closest coast and the ending distance of the tornado was closer to the coast than the starting distance.
+
+| **Tornado Type**        | **Starting Distance from Coast** | **Ending Distance from Coast** | **Criteria**             |
+|-------------------------|---------------------------------|-------------------------------|-------------------------|
+| Coastal → Inland        | ≤ 10,000 m                      | > Starting distance           | Moves away from coast   |
+| Inland → Coastal        | > 10,000 m                      | < Starting distance           | Moves toward coast      |
+| Other                   | Could be either                 | Could be either               | Doesn’t meet the 2 criterias for either group   |
+
+```{r, echo = FALSE}
+# Find probabilities of each type of tornado
+number_coastal_to_inland <- tornado_paths |>
+  filter(movement == "Coastal_to_Inland") |>
+  nrow()
+
+number_inland_to_coastal <- tornado_paths |>
+  filter(movement == "Inland_to_Coastal") |>
+  nrow()
+
+number_other <- tornado_paths |>
+  filter(movement == "Other") |>
+  nrow()
+
+total_tornadoes <- nrow(tornado_paths)
+
+probability_coastal_to_inland <- number_coastal_to_inland/total_tornadoes
+probability_inland_to_coastal <- number_inland_to_coastal/total_tornadoes
+probability_other <- number_other/total_tornadoes
+```
+
+Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:
+
+| Tornado Type        | Number of Tornadoes | Probability |
+|--------------------|-------------------|------------|
+| Coastal → Inland    | 1107               | 1.61%       |
+| Inland → Coastal    | 31777                | 46.18%     |
+| Neither             | 35934               | 52.22%      |
+| **Total**           | 68818              |  100%     |
+(Note: probabilities do not exactly sum to 100% due to rounding)
+
+As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.
+
+```{r, echo = FALSE}
+#Find probabilities of each magnitude of each type of tornado
+options(scipen = 999)
+
+probabilities <- tornado_paths |>
+  group_by(mag, movement) |>
+  summarise(count = n(), .groups = "drop") |>
+  group_by(movement) |>    # group by movement to calculate conditional probability
+  mutate(magnitude_proportion_given_movement_type = count / sum(count)) |>
+  ungroup() |>
+  mutate(proportion_of_total_tornadoes = count / total_tornadoes)
+
+probabilities_for_coastal_to_inland <- probabilities |>
+  filter(movement == "Coastal_to_Inland")
+```
+
+Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. [enter source here later] suggests that at least a magnitude 4 tornado would be needed so we will use a magnitude of 3 as a conservative threshold. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude $m$ and movement type $t$, call this $N_{m,t}$. The probability of a tornado having magnitude $m$ given movement type $t$ is the number of tornadoes with magnitude $m$ and movement type $t$ divided by the total number of tornadoes with movement type $t$.
+
+$$
+P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
+$$
+For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.
+
+Computing this probability we get:
+$$
+\frac{1 + 0}{1107} \approx 0.09\text{%}
+\quad
+(1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
+$$
+
+It is important to note that even this very low probability is a conservative upper estimate. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs and that a magnitude 4 tornado could lift a shark from the ocean onto land. These assumptions strongly favor the occurrence of a sharknado, since magnitude 4 tornadoes have only been observed lifting cars (objects of similar weight to sharks) several feet off the ground. [enter a source here later probably for some of this information]
+
+
+# I am gonna add some sources to information about the shark magnitude needed later
+
+
+
+
+

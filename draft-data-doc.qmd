@@ -9,13 +9,9 @@ library(tidyverse)
 
 tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv")
 
-tornado_data <- tornado_full_data |>
-  select(yr, date, st, mag, slat, slon, elat, elon, len, wid, ns, sn, sg)
+tornado_paths <- tornado_full_data |>
+  distinct(slat, slon, elat, elon, .keep_all = TRUE)
 
-tornado_data_counted_once <- tornado_data |>
-  filter(sn == 0) |>
-  select(-ns,-sn,-sg) |>
-  arrange(date)
 ```
 
 ```{r, echo = FALSE}
@@ -98,6 +94,30 @@ Some suggested data analysis methods include probability estimation based on mag
 
 
 https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf
+
+https://data.cnra.ca.gov/dataset/shark-incident-database-california
+
+
+```{r}
+shark_attacks <- read.csv("SharkAttacks.csv") |>
+  select(IncidentNum, Date, County, Location, Species, Longitude, Latitude, Comment)
+
+shark_attacks <- shark_attacks |>
+  select(IncidentNum, Date, County, Location, Species, Longitude, Latitude, Comment)
+
+unique(shark_attacks$Species)
+
+shark_attacks_not_sharks <- shark_attacks |>
+  filter(!Species %in% c("White", "Hammerhead", "Blue", "blue", "Blue", "Blue*", "Leopard", "Thresher", "Salmon", "Sevengill"))
+
+shark_attacks_actual_sharks <- shark_attacks |>
+  filter(!Species %in% c("Killer Whale", "Unknown"))
+
+unique(shark_attacks_actual_sharks$Species)
+
+view(shark_attacks_actual_sharks)
+```
+
 
 
 

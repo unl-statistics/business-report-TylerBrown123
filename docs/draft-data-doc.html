@@ -256,33 +256,28 @@ div.csl-indent {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tornado_full_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"1950-2024_actual_tornadoes.csv"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tornado_data <span class="ot">&lt;-</span> tornado_full_data <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yr, date, st, mag, slat, slon, elat, elon, len, wid, ns, sn, sg)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tornado_data_counted_once <span class="ot">&lt;-</span> tornado_data <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sn <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ns,<span class="sc">-</span>sn,<span class="sc">-</span>sg) <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tornado_paths <span class="ot">&lt;-</span> tornado_full_data <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(slat, slon, elat, elon, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="afkdzrimqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#afkdzrimqt table {
+<div id="pxlsdvyvhq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pxlsdvyvhq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#afkdzrimqt thead, #afkdzrimqt tbody, #afkdzrimqt tfoot, #afkdzrimqt tr, #afkdzrimqt td, #afkdzrimqt th {
+#pxlsdvyvhq thead, #pxlsdvyvhq tbody, #pxlsdvyvhq tfoot, #pxlsdvyvhq tr, #pxlsdvyvhq td, #pxlsdvyvhq th {
   border-style: none;
 }
 
-#afkdzrimqt p {
+#pxlsdvyvhq p {
   margin: 0;
   padding: 0;
 }
 
-#afkdzrimqt .gt_table {
+#pxlsdvyvhq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -308,12 +303,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_caption {
+#pxlsdvyvhq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#afkdzrimqt .gt_title {
+#pxlsdvyvhq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -325,7 +320,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#afkdzrimqt .gt_subtitle {
+#pxlsdvyvhq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -337,7 +332,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#afkdzrimqt .gt_heading {
+#pxlsdvyvhq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -349,13 +344,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_bottom_border {
+#pxlsdvyvhq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_col_headings {
+#pxlsdvyvhq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -370,7 +365,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_col_heading {
+#pxlsdvyvhq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -390,7 +385,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#afkdzrimqt .gt_column_spanner_outer {
+#pxlsdvyvhq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -402,15 +397,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#afkdzrimqt .gt_column_spanner_outer:first-child {
+#pxlsdvyvhq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#afkdzrimqt .gt_column_spanner_outer:last-child {
+#pxlsdvyvhq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#afkdzrimqt .gt_column_spanner {
+#pxlsdvyvhq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -422,11 +417,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#afkdzrimqt .gt_spanner_row {
+#pxlsdvyvhq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#afkdzrimqt .gt_group_heading {
+#pxlsdvyvhq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -452,7 +447,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#afkdzrimqt .gt_empty_group_heading {
+#pxlsdvyvhq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -467,15 +462,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#afkdzrimqt .gt_from_md > :first-child {
+#pxlsdvyvhq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#afkdzrimqt .gt_from_md > :last-child {
+#pxlsdvyvhq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#afkdzrimqt .gt_row {
+#pxlsdvyvhq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +489,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#afkdzrimqt .gt_stub {
+#pxlsdvyvhq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -507,7 +502,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#afkdzrimqt .gt_stub_row_group {
+#pxlsdvyvhq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -521,15 +516,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#afkdzrimqt .gt_row_group_first td {
+#pxlsdvyvhq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#afkdzrimqt .gt_row_group_first th {
+#pxlsdvyvhq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#afkdzrimqt .gt_summary_row {
+#pxlsdvyvhq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -539,16 +534,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#afkdzrimqt .gt_first_summary_row {
+#pxlsdvyvhq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_first_summary_row.thick {
+#pxlsdvyvhq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#afkdzrimqt .gt_last_summary_row {
+#pxlsdvyvhq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +553,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_grand_summary_row {
+#pxlsdvyvhq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -568,7 +563,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#afkdzrimqt .gt_first_grand_summary_row {
+#pxlsdvyvhq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +573,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_last_grand_summary_row_top {
+#pxlsdvyvhq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,11 +583,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_striped {
+#pxlsdvyvhq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#afkdzrimqt .gt_table_body {
+#pxlsdvyvhq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -601,7 +596,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_footnotes {
+#pxlsdvyvhq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -615,7 +610,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_footnote {
+#pxlsdvyvhq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -624,7 +619,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#afkdzrimqt .gt_sourcenotes {
+#pxlsdvyvhq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -638,7 +633,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#afkdzrimqt .gt_sourcenote {
+#pxlsdvyvhq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -646,72 +641,72 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#afkdzrimqt .gt_left {
+#pxlsdvyvhq .gt_left {
   text-align: left;
 }
 
-#afkdzrimqt .gt_center {
+#pxlsdvyvhq .gt_center {
   text-align: center;
 }
 
-#afkdzrimqt .gt_right {
+#pxlsdvyvhq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#afkdzrimqt .gt_font_normal {
+#pxlsdvyvhq .gt_font_normal {
   font-weight: normal;
 }
 
-#afkdzrimqt .gt_font_bold {
+#pxlsdvyvhq .gt_font_bold {
   font-weight: bold;
 }
 
-#afkdzrimqt .gt_font_italic {
+#pxlsdvyvhq .gt_font_italic {
   font-style: italic;
 }
 
-#afkdzrimqt .gt_super {
+#pxlsdvyvhq .gt_super {
   font-size: 65%;
 }
 
-#afkdzrimqt .gt_footnote_marks {
+#pxlsdvyvhq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#afkdzrimqt .gt_asterisk {
+#pxlsdvyvhq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#afkdzrimqt .gt_indent_1 {
+#pxlsdvyvhq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#afkdzrimqt .gt_indent_2 {
+#pxlsdvyvhq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#afkdzrimqt .gt_indent_3 {
+#pxlsdvyvhq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#afkdzrimqt .gt_indent_4 {
+#pxlsdvyvhq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#afkdzrimqt .gt_indent_5 {
+#pxlsdvyvhq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#afkdzrimqt .katex-display {
+#pxlsdvyvhq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#afkdzrimqt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pxlsdvyvhq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -805,6 +800,34 @@ div.csl-indent {
 <p>The NOAA is a reputable known source for these types of data so there should be no data quality issues.</p>
 <p>Some suggested data analysis methods include probability estimation based on magnitude and/or distance travelled inland or towards the coast</p>
 <p>https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf</p>
+<p>https://data.cnra.ca.gov/dataset/shark-incident-database-california</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>shark_attacks <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"SharkAttacks.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(IncidentNum, Date, County, Location, Species, Longitude, Latitude, Comment)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>shark_attacks <span class="ot">&lt;-</span> shark_attacks <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(IncidentNum, Date, County, Location, Species, Longitude, Latitude, Comment)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(shark_attacks<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "White"        "Hammerhead"   "Blue"         "Killer Whale" "Unknown"     
+ [6] "blue"         "Blue*"        "Mako"         "Leopard"      "Sevengill"   
+[11] "Salmon"       "Thresher"     ""            </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>shark_attacks_not_sharks <span class="ot">&lt;-</span> shark_attacks <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Hammerhead"</span>, <span class="st">"Blue"</span>, <span class="st">"blue"</span>, <span class="st">"Blue"</span>, <span class="st">"Blue*"</span>, <span class="st">"Leopard"</span>, <span class="st">"Thresher"</span>, <span class="st">"Salmon"</span>, <span class="st">"Sevengill"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>shark_attacks_actual_sharks <span class="ot">&lt;-</span> shark_attacks <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Killer Whale"</span>, <span class="st">"Unknown"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(shark_attacks_actual_sharks<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "White"      "Hammerhead" "Blue"       "blue"       "Blue*"     
+ [6] "Mako"       "Leopard"    "Sevengill"  "Salmon"     "Thresher"  
+[11] ""          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(shark_attacks_actual_sharks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -170,8 +199,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#i-am-gonna-add-some-sources-to-information-about-the-shark-magnitude-needed-later" id="toc-i-am-gonna-add-some-sources-to-information-about-the-shark-magnitude-needed-later" class="nav-link active" data-scroll-target="#i-am-gonna-add-some-sources-to-information-about-the-shark-magnitude-needed-later"><span class="header-section-number">C</span> I am gonna add some sources to information about the shark magnitude needed later</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -195,8 +230,107 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.</p>
+<p>To examine the potential risk of a sharknado, we compute the probability of such an event occurring. From the perspective of any tornado occurring in the USA, this probability can be expressed as the product of several individual probabilities: <span class="math display">\[
+P(\text{sharknado}) =
+P(\text{shark is present}) \times
+P(\text{tornado is coastal to inland}) \times
+P(\text{tornado is strong enough to lift a shark})
+\]</span> Alternatively, if we focus specifically on tornadoes that are coastal-to-inland, the probability of a sharknado occurring conditional on a tornado being coastal to inland can be expressed as:</p>
+<p><span class="math display">\[
+P(\text{sharknado | tornado is coastal to inland}) =
+P(\text{shark is present}) \times
+P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
+\]</span></p>
+<p>The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on the latter case.</p>
+<p>To obtain a very conservative upper estimate of this probability, we assume that the probability a shark is present is 100%. In other words, we assume that whenever a coastal to inland tornado occurs, a shark is present near the coast and available to be lifted. While this assumption is not necessarily realistic, it provides a conservative upper bound on the probability of a sharknado. This will strengthen the evidence when the probability of a sharknado is still quite low.</p>
+<p>To start, we must classify each tornado as being coastal to inland, inland to coastal, or neither. This could be done as just coastal to inland or not coastal to inland, but for thoroughness, we included another group for inland to coastal as well to compare.</p>
+<p>The threshold used to decide upon “coastal to inland” was if the starting distance of the tornado was within 10000 meters of the closest coast and the ending distance of the tornado was further from the closest coast than the starting distance was. Likewise, tornadoes were classified into the “inland to coastal” group if they were more than 10000 meters from the closest coast and the ending distance of the tornado was closer to the coast than the starting distance.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 28%">
+<col style="width: 27%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Tornado Type</strong></th>
+<th><strong>Starting Distance from Coast</strong></th>
+<th><strong>Ending Distance from Coast</strong></th>
+<th><strong>Criteria</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coastal → Inland</td>
+<td>≤ 10,000 m</td>
+<td>&gt; Starting distance</td>
+<td>Moves away from coast</td>
+</tr>
+<tr class="even">
+<td>Inland → Coastal</td>
+<td>&gt; 10,000 m</td>
+<td>&lt; Starting distance</td>
+<td>Moves toward coast</td>
+</tr>
+<tr class="odd">
+<td>Other</td>
+<td>Could be either</td>
+<td>Could be either</td>
+<td>Doesn’t meet the 2 criterias for either group</td>
+</tr>
+</tbody>
+</table>
+<p>Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Tornado Type</th>
+<th>Number of Tornadoes</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coastal → Inland</td>
+<td>1107</td>
+<td>1.61%</td>
+</tr>
+<tr class="even">
+<td>Inland → Coastal</td>
+<td>31777</td>
+<td>46.18%</td>
+</tr>
+<tr class="odd">
+<td>Neither</td>
+<td>35934</td>
+<td>52.22%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>68818</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>(Note: probabilities do not exactly sum to 100% due to rounding)</p>
+<p>As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.</p>
+<p>Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. [enter source here later] suggests that at least a magnitude 4 tornado would be needed so we will use a magnitude of 3 as a conservative threshold. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
+<p><span class="math display">\[
+P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
+\]</span> For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.</p>
+<p>Computing this probability we get: <span class="math display">\[
+\frac{1 + 0}{1107} \approx 0.09\text{%}
+\quad
+(1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
+\]</span></p>
+<p>It is important to note that this even this very low probability is a conservative upper estimate. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs and that a magnitude 4 tornado could lift a shark from the ocean onto land. These assumptions strongly favor the occurrence of a sharknado, since magnitude 4 tornadoes have only been observed lifting cars (objects of similar weight to sharks) several feet off the ground. [enter a source here later probably for some of this information]</p>
+<section id="i-am-gonna-add-some-sources-to-information-about-the-shark-magnitude-needed-later" class="level1" data-number="C">
+<h1 data-number="C"><span class="header-section-number">C</span> I am gonna add some sources to information about the shark magnitude needed later</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
