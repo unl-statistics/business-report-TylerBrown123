@@ -2,7 +2,7 @@
 title: "Draft: Results"
 ---
 
-```{r, message = FALSE, echo = FALSE, output = FALSE}
+```{r, message = FALSE}
 # Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
 library(tidyverse)
 
@@ -41,7 +41,42 @@ tornado_vars <- data.frame(
   Type = c("Integer", "Date", "Categorical", "Integer", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric"),
   Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
 )
+```
 
+```{r, message = FALSE, echo = FALSE}
+# Transforming latitude and longitude into math ready quantities
+library(rnaturalearth)
+library(sf)
+
+tornado_paths$start_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("slon", "slat"),
+  crs = 4269
+)$geometry
+
+tornado_paths$end_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("elon", "elat"),
+  crs = 4269
+)$geometry
+
+tornado_paths$start_geom_meters <- st_transform(
+  tornado_paths$start_geom_degrees, 5070
+)
+
+tornado_paths$end_geom_meters <- st_transform(
+  tornado_paths$end_geom_degrees, 5070
+)
+
+coast_m <- ne_coastline(returnclass = "sf") |> 
+  st_transform(5070)
+```
+
+These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.
+
+
+A table summarizing the data and their possible values is below:
+```{r, echo = FALSE}
 library(gt)
 
 tornado_vars %>%
@@ -76,37 +111,6 @@ tornado_vars %>%
     locations = cells_column_labels(everything())
   )
 ```
-
-```{r, message = FALSE, echo = FALSE}
-# Transforming latitude and longitude into math ready quantities
-library(rnaturalearth)
-library(sf)
-
-tornado_paths$start_geom_degrees <- st_as_sf(
-  tornado_paths,
-  coords = c("slon", "slat"),
-  crs = 4269
-)$geometry
-
-tornado_paths$end_geom_degrees <- st_as_sf(
-  tornado_paths,
-  coords = c("elon", "elat"),
-  crs = 4269
-)$geometry
-
-tornado_paths$start_geom_meters <- st_transform(
-  tornado_paths$start_geom_degrees, 5070
-)
-
-tornado_paths$end_geom_meters <- st_transform(
-  tornado_paths$end_geom_degrees, 5070
-)
-
-coast_m <- ne_coastline(returnclass = "sf") |> 
-  st_transform(5070)
-```
-
-These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.
 
 
 
