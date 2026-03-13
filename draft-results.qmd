@@ -145,7 +145,7 @@ options(scipen = 999)
 probabilities <- tornado_paths |>
   group_by(mag, movement) |>
   summarise(count = n(), .groups = "drop") |>
-  group_by(movement) |>    # group by movement to calculate conditional probability
+  group_by(movement) |>
   mutate(magnitude_proportion_given_movement_type = count / sum(count)) |>
   ungroup() |>
   mutate(proportion_of_total_tornadoes = count / total_tornadoes)
