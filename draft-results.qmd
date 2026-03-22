@@ -153,6 +153,12 @@ tornado_paths <- tornado_paths |>
 
 To start, we must classify each tornado as being coastal to inland, inland to coastal, or neither. This could be done as just coastal to inland or not coastal to inland, but for thoroughness, we included another group for inland to coastal as well to compare.
 
+::: callout-note
+
+This might be a good place for a diagram/sketch showing a stretch of coast and what would and wouldn't be counted, with tornadoes as vectors?
+
+:::
+
 The threshold used to decide upon "coastal to inland" was if the starting distance of the tornado was within 10000 meters of the closest coast and the ending distance of the tornado was further from the closest coast than the starting distance was. Likewise, tornadoes were classified into the "inland to coastal" group if they were more than 10000 meters from the closest coast and the ending distance of the tornado was closer to the coast than the starting distance.
 
 | **Tornado Type**        | **Starting Distance from Coast** | **Ending Distance from Coast** | **Criteria**             |
@@ -229,7 +235,15 @@ It is important to note that even this very low probability is a conservative up
 
 # I am gonna add some sources to information about the shark magnitude needed later
 
+::: callout-note
 
+I think you mostly just need to make the writing here a bit more formal and academic, e.g. "Consider that tornadoes with a magnitude lower than EF3 are unlikely to have the wind speed necessary to lift a shark large enough to truly create a sharknado event^[One assumes that a shark smaller than 12" would be unlikely to be sufficiently terrifying as to ....]."
 
+Sources are good too, though.
 
+Your numbers should be dynamically computed -- use R's ability to plug numbers into equations using 'r <value>' but with backticks instead of single quotes. Pull the values directly from the data.
+
+Talk your audience through the results section. Consider highlighting main conclusions in a box or something that's visually different from the wall-of-text.
+
+:::
 

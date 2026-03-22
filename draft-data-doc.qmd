@@ -97,6 +97,19 @@ https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf
 
 https://data.cnra.ca.gov/dataset/shark-incident-database-california
 
+::: callout-note
+
+You should reference these documents/web pages formally using Zotero/bibtex,
+
+:::
+
+
+::: callout-note
+
+How many of the important values you would want to use are missing? Is there any relationship between missingness? e.g. smaller tornadoes might be less likely to have observed values. Is there a difference in which storms are recorded over time? (e.g. at some point NOAA changed and allowed tornadoes that were radar indicated to be recorded alongside those which were witnessed.)
+
+:::
+
 
 ```{r}
 shark_attacks <- read.csv("SharkAttacks.csv") |>
