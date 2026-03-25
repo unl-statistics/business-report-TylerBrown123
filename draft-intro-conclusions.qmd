@@ -1,3 +1,27 @@
 ---
 title: "Draft: Intro/Conclusions"
 ---
+# Introduction
+Extreme weather events have long piqued public and scientific interest, especially when their consequences can be extremely dangerous for human life. Among these, the concept of a "sharknado," a tornado capable of lifting sharks from the ocean and throwing them inland, represents an exaggerated but intriguing scenario. While such an event is widely seen as fictional, evaluating a sharknado's plausibility provides an opportunity to apply probabilistic reasoning within real-world constraints.
+  
+This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occuring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland.
+
+```{mermaid}
+flowchart LR
+    A(Tornado forms near coast) --> B(Tornado moves inland)
+    B --> C(Tornado strong enough to lift shark)
+    C --> D(Shark present at location)
+    D --> E((SHARKNADO))
+```
+
+Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.
+  
+# Conclusion
+The analysis demonstrates that even under highly favorable assumptions, the probability of a sharknado occurring remains extremely low. By breaking down the event into a series of necessary events, each with a very small likelihood, the combined probability becomes effectively zero. Notably, the assumption that sharks are always available along the coastline and that tornadoes of sufficient magnitude can lift them inland represents a significant overestimation, reinforcing that the calculated probability serves as a conservative upper estimate, rather than a realistic expectation.
+
+This extremely low probability is to be expected as we are forcing many rare events to occur simultaneously. When this happens, the overall probability decreases dramatically. This idea extends beyond the concept of sharknadoes and is relevant for other concerns where many rare events need to occur together. In these scenarios, the overall likelihood will drop dramatically as the sharknado probability did.
+
+Future work could build upon this analysis by incorporating more realistic environmental constraints, such as the distribution of shark locations and the physics-based modeling of lifting forces required for moving sharks. Ultimately, while sharnadoes are far from realistic, the analytical approach used in this study shows the power of probabilistic reasoning in exploring even the most unusual problems.
+
+
+

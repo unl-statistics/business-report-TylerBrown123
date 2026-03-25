@@ -4,9 +4,9 @@ project:
 
 book:
   title: "Evaluation of <scenario>"
-  author: "Author Name"
+  author: "Tyler Brown"
   page-footer:
-    left: "Copyright 2025, Author Name"
+    left: "Copyright 2026, Tyler Brown"
   chapters:
     - index.qmd
     - intro.qmd

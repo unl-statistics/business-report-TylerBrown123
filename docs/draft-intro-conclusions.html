@@ -68,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -170,8 +173,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">D</span> Introduction</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">E</span> Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -195,8 +205,36 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level1" data-number="D">
+<h1 data-number="D"><span class="header-section-number">D</span> Introduction</h1>
+<p>Extreme weather events have long piqued public and scientific interest, especially when their consequences can be extremely dangerous for human life. Among these, the concept of a “sharknado,” a tornado capable of lifting sharks from the ocean and throwing them inland, represents an exaggerated but intriguing scenario. While such an event is widely seen as fictional, evaluating a sharknado’s plausibility provides an opportunity to apply probabilistic reasoning within real-world constraints.</p>
+<p>This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occuring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A(Tornado forms near coast) --&gt; B(Tornado moves inland)
+    B --&gt; C(Tornado strong enough to lift shark)
+    C --&gt; D(Shark present at location)
+    D --&gt; E((SHARKNADO))
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.</p>
+</section>
+<section id="conclusion" class="level1" data-number="E">
+<h1 data-number="E"><span class="header-section-number">E</span> Conclusion</h1>
+<p>The analysis demonstrates that even under highly favorable assumptions, the probability of a sharknado occurring remains extremely low. By breaking down the event into a series of necessary events, each with a very small likelihood, the combined probability becomes effectively zero. Notably, the assumption that sharks are always available along the coastline and that tornadoes of sufficient magnitude can lift them inland represents a significant overestimation, reinforcing that the calculated probability serves as a conservative upper estimate, rather than a realistic expectation.</p>
+<p>This extremely low probability is to be expected as we are forcing many rare events to occur simultaneously. When this happens, the overall probability decreases dramatically. This idea extends beyond the concept of sharknadoes and is relevant for other concerns where many rare events need to occur together. In these scenarios, the overall likelihood will drop dramatically as the sharknado probability did.</p>
+<p>Future work could build upon this analysis by incorporating more realistic environmental constraints, such as the distribution of shark locations and the physics-based modeling of lifting forces required for moving sharks. Ultimately, while sharnadoes are far from realistic, the analytical approach used in this study shows the power of probabilistic reasoning in exploring even the most unusual problems.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -635,7 +673,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2025, Author Name</p>
+<p>Copyright 2026, Tyler Brown</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
