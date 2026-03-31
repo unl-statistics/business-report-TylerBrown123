@@ -1,3 +1,12 @@
 ---
 title: "Draft: Executive Summary"
 ---
+
+The purpose of this report is to examine the probability of a "sharknado" by enforcing the real world constraints of such a phenomenon. The primary objective is to estimate the likelihood of a sharknado by sequencing the probability of all the events that must occur together, and evaluating them using avaiable tornado data and reasonable assumptions.
+
+The methodology starts by addressing missing values in the dataset. Specifically, there are many tornadoes in the original data set that have missing values for the ending latitude or longitude. These tornadoes are excluded from the analysis. This is okay to do as the tornadoes with missing values don't appear to have any bias in their location. The section continues by describing the probabilities that are sequenced together. Namely, these are the probability that a shark in present for the tornado to pick up and the probability that the tornado is strong enough to lift a shark. These probabilities will all be calculated given that the tornadoes are coastal to inland. A key assumption made is that sharks are always available to be picked up when a tornado coastal to inland tornado occurs. This assumption creates a great overestimate in the probability as it is very much favors the occurence of a sharknado. This ensures that if the resulting probability is still extremely small, then the sharknado risk is essentially nonexistent.
+
+In the results, the probabilities are computed. It is emphasized that the real world constraints for a sharknado to actually happen cause the probability to be very small. This reflects the idea that sharnadoes are simply a product of fiction, and have effectively no risk in real life.
+
+Based on the findings of this anlysis, no action needs to be taken to adjust insurance products for the risk of sharknadoes. The probability of such an event happening is effectively zero, and as a result, any expected claims would also be zero. Time and resources are better allocated towards models accounting for other, more likely, catastrophic events such as tsunamis, hurricanes, or standard tornadoes.
+
