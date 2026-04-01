@@ -2,7 +2,14 @@
 title: "Draft: Results"
 ---
 
-```{r, message = FALSE}
+In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.
+
+![](0_latitude_0_longitude_picture.jpg)
+As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, are there tornadoes in a certain area that have a significantly higher chance of having one of these ends values being missing? To examine this, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
+
+
+
+```{r, message = FALSE, echo = FALSE}
 # Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
 library(tidyverse)
 
@@ -45,6 +52,11 @@ tornado_vars <- data.frame(
 tornado_paths <- tornado_paths |>
   filter(end_missing == FALSE)
 ```
+
+```{r}
+
+```
+
 
 ```{r, message = FALSE, echo = FALSE}
 # Transforming latitude and longitude into math ready quantities
@@ -162,7 +174,7 @@ The threshold used to decide upon "coastal to inland" was if the starting distan
 |-------------------------|---------------------------------|-------------------------------|-------------------------|
 | Coastal → Inland        | ≤ 10,000 m                      | > Starting distance           | Moves away from coast   |
 | Inland → Coastal        | > 10,000 m                      | < Starting distance           | Moves toward coast      |
-| Other                   | Could be either                 | Could be either               | Doesn’t meet the 2 criterias for either group   |
+| Other                   | Could be either                 | Could be either               | Doesn’t meet the 2 criteria for either group   |
 
 <div style="text-align:center;">
   <img src="usmap_with_vectors.jpg" width="500"/>
