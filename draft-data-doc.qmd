@@ -99,7 +99,9 @@ https://data.cnra.ca.gov/dataset/shark-incident-database-california
 
 ::: callout-note
 
-You should reference these documents/web pages formally using Zotero/bibtex,
+You should reference these documents/web pages formally using Zotero/bibtex.
+
+Ideally your documentation would be a bit more structured/formal and have a more varied structure than "The data is/was/were". Use the same tense throughout a paragraph, please.
 
 :::
 
