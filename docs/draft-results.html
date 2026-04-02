@@ -308,29 +308,32 @@ window.Quarto = {
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Type =</span> <span class="fu">c</span>(<span class="st">"Integer"</span>, <span class="st">"Date"</span>, <span class="st">"Categorical"</span>, <span class="st">"Integer"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>, <span class="st">"Numeric"</span>),</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Possible_Values =</span> <span class="fu">c</span>(<span class="st">"1950-2024"</span>, <span class="st">"01-01-1950 to 12/31/2024"</span>, <span class="st">"Any US State"</span>, <span class="st">"0-5 or -9 Meaning Unknown"</span>, <span class="st">"US Latitudes ~ 29 to 50"</span>, <span class="st">"US Longitudes ~ -125 to -70"</span>, <span class="st">"US Latitudes ~ 29 to 50"</span>, <span class="st">"US Longitudes ~ -125 to -70"</span>, <span class="st">"0-250 Miles"</span>, <span class="st">"0-3500 Yards"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>tornado_paths <span class="ot">&lt;-</span> tornado_paths <span class="sc">|&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(end_missing <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.</p>
 <p>A table summarizing the data and their possible values is below:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cxqhcjrrku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cxqhcjrrku table {
+<div id="hackxdbbrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hackxdbbrx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cxqhcjrrku thead, #cxqhcjrrku tbody, #cxqhcjrrku tfoot, #cxqhcjrrku tr, #cxqhcjrrku td, #cxqhcjrrku th {
+#hackxdbbrx thead, #hackxdbbrx tbody, #hackxdbbrx tfoot, #hackxdbbrx tr, #hackxdbbrx td, #hackxdbbrx th {
   border-style: none;
 }
 
-#cxqhcjrrku p {
+#hackxdbbrx p {
   margin: 0;
   padding: 0;
 }
 
-#cxqhcjrrku .gt_table {
+#hackxdbbrx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -356,12 +359,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_caption {
+#hackxdbbrx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cxqhcjrrku .gt_title {
+#hackxdbbrx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -373,7 +376,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#cxqhcjrrku .gt_subtitle {
+#hackxdbbrx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -385,7 +388,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#cxqhcjrrku .gt_heading {
+#hackxdbbrx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -397,13 +400,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_bottom_border {
+#hackxdbbrx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_col_headings {
+#hackxdbbrx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -418,7 +421,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_col_heading {
+#hackxdbbrx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -438,7 +441,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cxqhcjrrku .gt_column_spanner_outer {
+#hackxdbbrx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -450,15 +453,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#cxqhcjrrku .gt_column_spanner_outer:first-child {
+#hackxdbbrx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cxqhcjrrku .gt_column_spanner_outer:last-child {
+#hackxdbbrx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cxqhcjrrku .gt_column_spanner {
+#hackxdbbrx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -470,11 +473,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#cxqhcjrrku .gt_spanner_row {
+#hackxdbbrx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cxqhcjrrku .gt_group_heading {
+#hackxdbbrx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -500,7 +503,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#cxqhcjrrku .gt_empty_group_heading {
+#hackxdbbrx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -515,15 +518,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#cxqhcjrrku .gt_from_md > :first-child {
+#hackxdbbrx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cxqhcjrrku .gt_from_md > :last-child {
+#hackxdbbrx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cxqhcjrrku .gt_row {
+#hackxdbbrx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -542,7 +545,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#cxqhcjrrku .gt_stub {
+#hackxdbbrx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -555,7 +558,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cxqhcjrrku .gt_stub_row_group {
+#hackxdbbrx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -569,15 +572,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#cxqhcjrrku .gt_row_group_first td {
+#hackxdbbrx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cxqhcjrrku .gt_row_group_first th {
+#hackxdbbrx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cxqhcjrrku .gt_summary_row {
+#hackxdbbrx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -587,16 +590,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cxqhcjrrku .gt_first_summary_row {
+#hackxdbbrx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_first_summary_row.thick {
+#hackxdbbrx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cxqhcjrrku .gt_last_summary_row {
+#hackxdbbrx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -606,7 +609,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_grand_summary_row {
+#hackxdbbrx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -616,7 +619,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cxqhcjrrku .gt_first_grand_summary_row {
+#hackxdbbrx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,7 +629,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_last_grand_summary_row_top {
+#hackxdbbrx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -636,11 +639,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_striped {
+#hackxdbbrx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cxqhcjrrku .gt_table_body {
+#hackxdbbrx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -649,7 +652,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_footnotes {
+#hackxdbbrx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -663,7 +666,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_footnote {
+#hackxdbbrx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -672,7 +675,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cxqhcjrrku .gt_sourcenotes {
+#hackxdbbrx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -686,7 +689,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#cxqhcjrrku .gt_sourcenote {
+#hackxdbbrx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -694,72 +697,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#cxqhcjrrku .gt_left {
+#hackxdbbrx .gt_left {
   text-align: left;
 }
 
-#cxqhcjrrku .gt_center {
+#hackxdbbrx .gt_center {
   text-align: center;
 }
 
-#cxqhcjrrku .gt_right {
+#hackxdbbrx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cxqhcjrrku .gt_font_normal {
+#hackxdbbrx .gt_font_normal {
   font-weight: normal;
 }
 
-#cxqhcjrrku .gt_font_bold {
+#hackxdbbrx .gt_font_bold {
   font-weight: bold;
 }
 
-#cxqhcjrrku .gt_font_italic {
+#hackxdbbrx .gt_font_italic {
   font-style: italic;
 }
 
-#cxqhcjrrku .gt_super {
+#hackxdbbrx .gt_super {
   font-size: 65%;
 }
 
-#cxqhcjrrku .gt_footnote_marks {
+#hackxdbbrx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cxqhcjrrku .gt_asterisk {
+#hackxdbbrx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cxqhcjrrku .gt_indent_1 {
+#hackxdbbrx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cxqhcjrrku .gt_indent_2 {
+#hackxdbbrx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cxqhcjrrku .gt_indent_3 {
+#hackxdbbrx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cxqhcjrrku .gt_indent_4 {
+#hackxdbbrx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cxqhcjrrku .gt_indent_5 {
+#hackxdbbrx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cxqhcjrrku .katex-display {
+#hackxdbbrx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cxqhcjrrku div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hackxdbbrx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -857,19 +860,6 @@ P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland}
 <p>The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on the latter case.</p>
 <p>To obtain a very conservative upper estimate of this probability, we assume that the probability a shark is present is 100%. In other words, we assume that whenever a coastal to inland tornado occurs, a shark is present near the coast and available to be lifted. While this assumption is not necessarily realistic, it provides a conservative upper bound on the probability of a sharknado. This will strengthen the evidence when the probability of a sharknado is still quite low.</p>
 <p>To start, we must classify each tornado as being coastal to inland, inland to coastal, or neither. This could be done as just coastal to inland or not coastal to inland, but for thoroughness, we included another group for inland to coastal as well to compare.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This might be a good place for a diagram/sketch showing a stretch of coast and what would and wouldn’t be counted, with tornadoes as vectors?</p>
-</div>
-</div>
 <p>The threshold used to decide upon “coastal to inland” was if the starting distance of the tornado was within 10000 meters of the closest coast and the ending distance of the tornado was further from the closest coast than the starting distance was. Likewise, tornadoes were classified into the “inland to coastal” group if they were more than 10000 meters from the closest coast and the ending distance of the tornado was closer to the coast than the starting distance.</p>
 <table class="caption-top table">
 <colgroup>
@@ -907,46 +897,51 @@ Note
 </tr>
 </tbody>
 </table>
+<div style="text-align:center;">
+<p><img src="usmap_with_vectors.jpg" width="500"></p>
+</div>
+<p style="text-align:center;">
+<span style="color:red;">Coastal to Inland</span> | <span style="color:blue;">Inland to Coastal</span>
+</p>
 <p>Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:</p>
-<table class="caption-top table">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
-<th>Tornado Type</th>
-<th>Number of Tornadoes</th>
-<th>Probability</th>
+<th style="text-align: left;">Tornado Type</th>
+<th style="text-align: right;">Number of Tornadoes</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Coastal → Inland</td>
-<td>1107</td>
-<td>1.61%</td>
+<td style="text-align: left;">Coastal to Inland</td>
+<td style="text-align: right;">422</td>
+<td style="text-align: left;">0.94%</td>
 </tr>
 <tr class="even">
-<td>Inland → Coastal</td>
-<td>31777</td>
-<td>46.18%</td>
+<td style="text-align: left;">Inland to Coastal</td>
+<td style="text-align: right;">16537</td>
+<td style="text-align: left;">36.91%</td>
 </tr>
 <tr class="odd">
-<td>Neither</td>
-<td>35934</td>
-<td>52.22%</td>
-</tr>
-<tr class="even">
-<td><strong>Total</strong></td>
-<td>68818</td>
-<td>100%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">27850</td>
+<td style="text-align: left;">62.15%</td>
 </tr>
 </tbody>
 </table>
-<p>(Note: probabilities do not exactly sum to 100% due to rounding)</p>
+</div>
+</div>
 <p>As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.</p>
 <p>Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. [enter source here later] suggests that at least a magnitude 4 tornado would be needed so we will use a magnitude of 3 as a conservative threshold. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
 <p><span class="math display">\[
 P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
 \]</span> For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.</p>
 <p>Computing this probability we get: <span class="math display">\[
-\frac{1 + 0}{1107} \approx 0.09\text{%}
+\frac{1 + 0}{422}
+\approx 0.2369668\%
 \quad
 (1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
 \]</span></p>

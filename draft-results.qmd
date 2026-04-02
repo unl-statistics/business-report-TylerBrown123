@@ -2,7 +2,14 @@
 title: "Draft: Results"
 ---
 
-```{r, message = FALSE}
+In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.
+
+![](0_latitude_0_longitude_picture.jpg)
+As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, are there tornadoes in a certain area that have a significantly higher chance of having one of these ends values being missing? To examine this, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
+
+
+
+```{r, message = FALSE, echo = FALSE}
 # Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
 library(tidyverse)
 
@@ -41,7 +48,15 @@ tornado_vars <- data.frame(
   Type = c("Integer", "Date", "Categorical", "Integer", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric"),
   Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
 )
+
+tornado_paths <- tornado_paths |>
+  filter(end_missing == FALSE)
 ```
+
+```{r}
+
+```
+
 
 ```{r, message = FALSE, echo = FALSE}
 # Transforming latitude and longitude into math ready quantities
@@ -153,21 +168,27 @@ tornado_paths <- tornado_paths |>
 
 To start, we must classify each tornado as being coastal to inland, inland to coastal, or neither. This could be done as just coastal to inland or not coastal to inland, but for thoroughness, we included another group for inland to coastal as well to compare.
 
-::: callout-note
-
-This might be a good place for a diagram/sketch showing a stretch of coast and what would and wouldn't be counted, with tornadoes as vectors?
-
-:::
-
 The threshold used to decide upon "coastal to inland" was if the starting distance of the tornado was within 10000 meters of the closest coast and the ending distance of the tornado was further from the closest coast than the starting distance was. Likewise, tornadoes were classified into the "inland to coastal" group if they were more than 10000 meters from the closest coast and the ending distance of the tornado was closer to the coast than the starting distance.
 
 | **Tornado Type**        | **Starting Distance from Coast** | **Ending Distance from Coast** | **Criteria**             |
 |-------------------------|---------------------------------|-------------------------------|-------------------------|
 | Coastal → Inland        | ≤ 10,000 m                      | > Starting distance           | Moves away from coast   |
 | Inland → Coastal        | > 10,000 m                      | < Starting distance           | Moves toward coast      |
-| Other                   | Could be either                 | Could be either               | Doesn’t meet the 2 criterias for either group   |
+| Other                   | Could be either                 | Could be either               | Doesn’t meet the 2 criteria for either group   |
+
+<div style="text-align:center;">
+  <img src="usmap_with_vectors.jpg" width="500"/>
+</div>
+
+<p style="text-align:center;">
+<span style="color:red;">Coastal to Inland</span> | 
+<span style="color:blue;">Inland to Coastal</span>
+</p>
+
+Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:
 
 ```{r, echo = FALSE}
+library(knitr)
 # Find probabilities of each type of tornado
 number_coastal_to_inland <- tornado_paths |>
   filter(movement == "Coastal_to_Inland") |>
@@ -183,20 +204,26 @@ number_other <- tornado_paths |>
 
 total_tornadoes <- nrow(tornado_paths)
 
-probability_coastal_to_inland <- number_coastal_to_inland/total_tornadoes
-probability_inland_to_coastal <- number_inland_to_coastal/total_tornadoes
-probability_other <- number_other/total_tornadoes
+probability_coastal_to_inland <- 100*(number_coastal_to_inland/total_tornadoes)
+probability_inland_to_coastal <- 100*(number_inland_to_coastal/total_tornadoes)
+probability_other <- 100*(number_other/total_tornadoes)
+
+tornado_df_for_table <- data.frame(
+  category = c("Coastal to Inland", "Inland to Coastal", "Other"),
+  number_of_tornadoes = c(number_coastal_to_inland, number_inland_to_coastal, number_other),
+  probability = c(probability_coastal_to_inland, probability_inland_to_coastal, probability_other)
+)
+
+kable(
+  transform(
+    tornado_df_for_table,
+    probability = sprintf("%.2f%%", probability)
+  ),
+  col.names = c("Tornado Type", "Number of Tornadoes", "Probability")
+)
+
+
 ```
-
-Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:
-
-| Tornado Type        | Number of Tornadoes | Probability |
-|--------------------|-------------------|------------|
-| Coastal → Inland    | 1107               | 1.61%       |
-| Inland → Coastal    | 31777                | 46.18%     |
-| Neither             | 35934               | 52.22%      |
-| **Total**           | 68818              |  100%     |
-(Note: probabilities do not exactly sum to 100% due to rounding)
 
 As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.
 
@@ -213,7 +240,8 @@ probabilities <- tornado_paths |>
   mutate(proportion_of_total_tornadoes = count / total_tornadoes)
 
 probabilities_for_coastal_to_inland <- probabilities |>
-  filter(movement == "Coastal_to_Inland")
+  filter(movement == "Coastal_to_Inland") |>
+  mutate(magnitude_probability_given_movement_type = 100*magnitude_proportion_given_movement_type)
 ```
 
 Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. [enter source here later] suggests that at least a magnitude 4 tornado would be needed so we will use a magnitude of 3 as a conservative threshold. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude $m$ and movement type $t$, call this $N_{m,t}$. The probability of a tornado having magnitude $m$ given movement type $t$ is the number of tornadoes with magnitude $m$ and movement type $t$ divided by the total number of tornadoes with movement type $t$.
@@ -225,10 +253,12 @@ For our specific probability we are interested in this probability where m = 4 o
 
 Computing this probability we get:
 $$
-\frac{1 + 0}{1107} \approx 0.09\text{%}
+\frac{`r probabilities_for_coastal_to_inland[6,"count"]` + 0}{`r sum(probabilities_for_coastal_to_inland$count)`} 
+\approx `r probabilities_for_coastal_to_inland[6,"magnitude_probability_given_movement_type"]`\%
 \quad
 (1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
 $$
+
 
 It is important to note that even this very low probability is a conservative upper estimate. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs and that a magnitude 4 tornado could lift a shark from the ocean onto land. These assumptions strongly favor the occurrence of a sharknado, since magnitude 4 tornadoes have only been observed lifting cars (objects of similar weight to sharks) several feet off the ground. [enter a source here later probably for some of this information]
 
