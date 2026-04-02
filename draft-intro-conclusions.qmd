@@ -14,7 +14,13 @@ flowchart LR
     D --> E((SHARKNADO))
 ```
 
-Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.
+::: callout-note
+
+Label, caption, cite in the paragraph.
+
+:::
+
+Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurrence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.
   
 # Conclusion
 The analysis demonstrates that even under highly favorable assumptions, the probability of a sharknado occurring remains extremely low. By breaking down the event into a series of necessary events, each with a very small likelihood, the combined probability becomes effectively zero. Notably, the assumption that sharks are always available along the coastline and that tornadoes of sufficient magnitude can lift them inland represents a significant overestimation, reinforcing that the calculated probability serves as a conservative upper estimate, rather than a realistic expectation.
@@ -25,3 +31,21 @@ Future work could build upon this analysis by incorporating more realistic envir
 
 
 
+::: callout-note
+
+This is reasonable -- you may want some sort of citation to the movie and/or an analysis of similar events/rumors...
+
+https://www.youtube.com/shorts/Rzdzay13RLM
+https://www.nytimes.com/2017/08/28/us/politics/shark-hurricane-harvey-rumors.html
+https://www.youtube.com/watch?v=a5wRZdk9bSI
+https://en.wikipedia.org/wiki/Rain_of_animals (cite the sources themselves rather than the article unless citing the existence of the phenomenon)
+
+https://www.nj.com/news/2025/08/shark-crashes-karaoke-night-at-jersey-shore-bar-during-hurricane-erin-flooding.html
+
+
+https://www.pastemagazine.com/tech/memes/hurricane-shark-meme-real-climate-change-florida
+- Contrary to this article, the meme well pre-dates sharknado - I remember photoshopped pics of sharks in the tunnels under downtown Houston during Tropical Storm Alison circa 2001.
+
+https://www.youtube.com/watch?v=2g2MLufKBUQ
+
+:::
