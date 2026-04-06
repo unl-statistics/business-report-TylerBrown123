@@ -5,15 +5,14 @@ title: "Draft: Results"
 In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.
 
 ![](0_latitude_0_longitude_picture.jpg)
-As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, are there tornadoes in a certain area that have a significantly higher chance of having one of these ends values being missing? To examine this, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
-
-
+As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
 
 ```{r, message = FALSE, echo = FALSE}
 # Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
 library(tidyverse)
 
-tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv")
+tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv") |>
+  filter(!st %in% c("AK", "HI", "PR", "VI"))
 
 tornado_paths <- tornado_full_data |>
   distinct(slat, slon, elat, elon, .keep_all = TRUE)
@@ -24,10 +23,9 @@ tornado_paths <- tornado_paths |>
 tornado_paths <- tornado_paths |>
   mutate(end_missing = (elat == 0 | elon == 0))
 
-ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
-       aes(x = slon, y = slat)) +
+ggplot(tornado_paths, aes(x = slon, y = slat)) +
   geom_point(color = "red", alpha = 0.5) +
-  labs(title = "Tornado Start Locations with Missing End Coordinates",
+  labs(title = "Starting Location For All Tornadoes",
        x = "Starting Longitude", y = "Starting Latitude") +
   theme_minimal()
 
@@ -49,12 +47,126 @@ tornado_vars <- data.frame(
   Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
 )
 
-tornado_paths <- tornado_paths |>
-  filter(end_missing == FALSE)
 ```
 
-```{r}
+```{r, echo = FALSE}
+ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
+       aes(x = slon, y = slat)) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(title = "Starting Location For Tornadoes With Missing End Coordinates",
+       x = "Starting Longitude", y = "Starting Latitude") +
+  theme_minimal()
+```
 
+There does not appear to be any trend in the missing end coordinates. No region of the U.S. shows a higher incidence of missing endpoints than another, suggesting that this initial concern is alleviated.
+
+For the second concern regarding the magnitude, we can create a plot for each magnitude level and examine if there is any difference in the incidence of missing end coordinates depending on the magnitude.
+
+```{r}
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 0),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 0)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 1),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 1)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 2),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 2)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 3),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 3)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 4),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 4)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 5),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude 5)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+
+ggplot(
+  tornado_paths |> filter((elat == 0 | elon == 0) & mag == -9),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(
+    title = "**(Magnitude -9)** Starting Location For Tornadoes With Missing End Coordinates",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
 ```
 
 
@@ -62,6 +174,9 @@ tornado_paths <- tornado_paths |>
 # Transforming latitude and longitude into math ready quantities
 library(rnaturalearth)
 library(sf)
+
+tornado_paths <- tornado_paths |>
+  filter(end_missing == FALSE)
 
 tornado_paths$start_geom_degrees <- st_as_sf(
   tornado_paths,
