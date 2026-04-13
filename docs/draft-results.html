@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -231,7 +265,7 @@ window.Quarto = {
 
 
 <p>In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as “0” instead of “NA”. This can’t be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.</p>
-<p><img src="0_latitude_0_longitude_picture.jpg" class="img-fluid"> As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, are there tornadoes in a certain area that have a significantly higher chance of having one of these ends values being missing? To examine this, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.</p>
+<p><img src="0_latitude_0_longitude_picture.jpg" class="img-fluid"> As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -250,27 +284,92 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>There does not appear to be any trend in the missing end coordinates. No region of the U.S. shows a higher incidence of missing endpoints than another, suggesting that this initial concern is alleviated.</p>
+<p>For the second concern regarding the magnitude, we can create a plot for each magnitude level and examine if there is any difference in the incidence of missing end coordinates depending on the magnitude.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From these plots, we can see that none of the magnitudes show a large difference in location on the map. This alleviates our second concern, and as such, we can remove these tornadoes without worry about affecting our inference on the probability of a sharknado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tornado_paths <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(elat <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> elon <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> slon, <span class="at">y =</span> slat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mag) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Starting Location For Tornadoes With Missing End Coordinates (by Magnitude)"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Starting Longitude"</span>, </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Starting Latitude"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="draft-results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>These parts above are me filtering the data and making sure there are only 1 row per actual tornado, and how I am excluding rows that have a 0 for their ending latitude or longitude, as well as justifying why I am okay to do that. Then I am transforming the latitude and longitude into actual math ready quantities and defining the coastline. I believe this would go in a methods section so I am not going to write on it yet for this submission.</p>
 <p>A table summarizing the data and their possible values is below:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="skckkpbumv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#skckkpbumv table {
+<div id="pklvjsnbeo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pklvjsnbeo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#skckkpbumv thead, #skckkpbumv tbody, #skckkpbumv tfoot, #skckkpbumv tr, #skckkpbumv td, #skckkpbumv th {
+#pklvjsnbeo thead, #pklvjsnbeo tbody, #pklvjsnbeo tfoot, #pklvjsnbeo tr, #pklvjsnbeo td, #pklvjsnbeo th {
   border-style: none;
 }
 
-#skckkpbumv p {
+#pklvjsnbeo p {
   margin: 0;
   padding: 0;
 }
 
-#skckkpbumv .gt_table {
+#pklvjsnbeo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -296,12 +395,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_caption {
+#pklvjsnbeo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#skckkpbumv .gt_title {
+#pklvjsnbeo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -313,7 +412,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#skckkpbumv .gt_subtitle {
+#pklvjsnbeo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -325,7 +424,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#skckkpbumv .gt_heading {
+#pklvjsnbeo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -337,13 +436,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_bottom_border {
+#pklvjsnbeo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_col_headings {
+#pklvjsnbeo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -358,7 +457,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_col_heading {
+#pklvjsnbeo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -378,7 +477,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#skckkpbumv .gt_column_spanner_outer {
+#pklvjsnbeo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -390,15 +489,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#skckkpbumv .gt_column_spanner_outer:first-child {
+#pklvjsnbeo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#skckkpbumv .gt_column_spanner_outer:last-child {
+#pklvjsnbeo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#skckkpbumv .gt_column_spanner {
+#pklvjsnbeo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -410,11 +509,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#skckkpbumv .gt_spanner_row {
+#pklvjsnbeo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#skckkpbumv .gt_group_heading {
+#pklvjsnbeo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -440,7 +539,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#skckkpbumv .gt_empty_group_heading {
+#pklvjsnbeo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -455,15 +554,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#skckkpbumv .gt_from_md > :first-child {
+#pklvjsnbeo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#skckkpbumv .gt_from_md > :last-child {
+#pklvjsnbeo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#skckkpbumv .gt_row {
+#pklvjsnbeo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -482,7 +581,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#skckkpbumv .gt_stub {
+#pklvjsnbeo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -495,7 +594,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#skckkpbumv .gt_stub_row_group {
+#pklvjsnbeo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -509,15 +608,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#skckkpbumv .gt_row_group_first td {
+#pklvjsnbeo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#skckkpbumv .gt_row_group_first th {
+#pklvjsnbeo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#skckkpbumv .gt_summary_row {
+#pklvjsnbeo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -527,16 +626,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#skckkpbumv .gt_first_summary_row {
+#pklvjsnbeo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_first_summary_row.thick {
+#pklvjsnbeo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#skckkpbumv .gt_last_summary_row {
+#pklvjsnbeo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +645,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_grand_summary_row {
+#pklvjsnbeo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -556,7 +655,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#skckkpbumv .gt_first_grand_summary_row {
+#pklvjsnbeo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -566,7 +665,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_last_grand_summary_row_top {
+#pklvjsnbeo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -576,11 +675,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_striped {
+#pklvjsnbeo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#skckkpbumv .gt_table_body {
+#pklvjsnbeo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -589,7 +688,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_footnotes {
+#pklvjsnbeo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -603,7 +702,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_footnote {
+#pklvjsnbeo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -612,7 +711,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#skckkpbumv .gt_sourcenotes {
+#pklvjsnbeo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -626,7 +725,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#skckkpbumv .gt_sourcenote {
+#pklvjsnbeo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -634,72 +733,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#skckkpbumv .gt_left {
+#pklvjsnbeo .gt_left {
   text-align: left;
 }
 
-#skckkpbumv .gt_center {
+#pklvjsnbeo .gt_center {
   text-align: center;
 }
 
-#skckkpbumv .gt_right {
+#pklvjsnbeo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#skckkpbumv .gt_font_normal {
+#pklvjsnbeo .gt_font_normal {
   font-weight: normal;
 }
 
-#skckkpbumv .gt_font_bold {
+#pklvjsnbeo .gt_font_bold {
   font-weight: bold;
 }
 
-#skckkpbumv .gt_font_italic {
+#pklvjsnbeo .gt_font_italic {
   font-style: italic;
 }
 
-#skckkpbumv .gt_super {
+#pklvjsnbeo .gt_super {
   font-size: 65%;
 }
 
-#skckkpbumv .gt_footnote_marks {
+#pklvjsnbeo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#skckkpbumv .gt_asterisk {
+#pklvjsnbeo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#skckkpbumv .gt_indent_1 {
+#pklvjsnbeo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#skckkpbumv .gt_indent_2 {
+#pklvjsnbeo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#skckkpbumv .gt_indent_3 {
+#pklvjsnbeo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#skckkpbumv .gt_indent_4 {
+#pklvjsnbeo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#skckkpbumv .gt_indent_5 {
+#pklvjsnbeo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#skckkpbumv .katex-display {
+#pklvjsnbeo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#skckkpbumv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pklvjsnbeo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

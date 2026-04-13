@@ -62,7 +62,9 @@ There does not appear to be any trend in the missing end coordinates. No region 
 
 For the second concern regarding the magnitude, we can create a plot for each magnitude level and examine if there is any difference in the incidence of missing end coordinates depending on the magnitude.
 
-```{r}
+```{r, echo = FALSE}
+library(ggtext)
+
 ggplot(
   tornado_paths |> filter((elat == 0 | elon == 0) & mag == 0),
   aes(x = slon, y = slat)
@@ -137,29 +139,22 @@ ggplot(
   theme(
     plot.title = element_markdown()
   )
+```
 
+From these plots, we can see that none of the magnitudes show a large difference in location on the map. This alleviates our second concern, and as such, we can remove these tornadoes without worry about affecting our inference on the probability of a sharknado.
+
+
+
+```{r}
 ggplot(
-  tornado_paths |> filter((elat == 0 | elon == 0) & mag == 5),
+  tornado_paths |> 
+    filter(elat == 0 | elon == 0),
   aes(x = slon, y = slat)
 ) +
   geom_point(color = "red", alpha = 0.5) +
+  facet_wrap(~ mag) +
   labs(
-    title = "**(Magnitude 5)** Starting Location For Tornadoes With Missing End Coordinates",
-    x = "Starting Longitude", 
-    y = "Starting Latitude"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_markdown()
-  )
-
-ggplot(
-  tornado_paths |> filter((elat == 0 | elon == 0) & mag == -9),
-  aes(x = slon, y = slat)
-) +
-  geom_point(color = "red", alpha = 0.5) +
-  labs(
-    title = "**(Magnitude -9)** Starting Location For Tornadoes With Missing End Coordinates",
+    title = "Starting Location For Tornadoes With Missing End Coordinates (by Magnitude)",
     x = "Starting Longitude", 
     y = "Starting Latitude"
   ) +
@@ -168,7 +163,6 @@ ggplot(
     plot.title = element_markdown()
   )
 ```
-
 
 ```{r, message = FALSE, echo = FALSE}
 # Transforming latitude and longitude into math ready quantities
