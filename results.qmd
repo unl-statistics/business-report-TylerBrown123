@@ -140,9 +140,6 @@ tornado_paths <- tornado_paths |>
   )
 ```
 
-
-
-
 Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:
 
 ```{r, echo = FALSE}
@@ -202,7 +199,7 @@ probabilities_for_coastal_to_inland <- probabilities |>
   mutate(magnitude_probability_given_movement_type = 100*magnitude_proportion_given_movement_type)
 ```
 
-Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. Based on @fisheriesWhiteSharkNOAA2025, we see that great white sharks can be up to 4500 lbs. Based on @HowMuchDoes, we see that cars weigh on average 4419 lbs. This suggests that the weight of these great whites is comparable to cars. From @CanCarBe2025, we see that EF3 tornadoes are "likely to toss cars and trucks," but EF4 tornadoes are "very likely to toss cars many feet." This suggests that at least a magnitude 4 tornado would be needed, as for a sharknado to occur, we need the sharks to be picked up and tossed quite far onto land, not just to be picked up and tossed slightly. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude $m$ and movement type $t$, call this $N_{m,t}$. The probability of a tornado having magnitude $m$ given movement type $t$ is the number of tornadoes with magnitude $m$ and movement type $t$ divided by the total number of tornadoes with movement type $t$.
+Lastly, we estimate the probability that a tornado is strong enough to lift a shark, conditional on it being coastal-to-inland. According to @fisheriesWhiteSharkNOAA2025, great white sharks can weigh up to 4,500 lbs. Similarly, @HowMuchDoes reports that the average car weighs approximately 4,419 lbs, suggesting that great white sharks are of comparable mass to cars. From @CanCarBe2025, EF3 tornadoes are “likely to toss cars and trucks,” whereas EF4 tornadoes are “very likely to toss cars many feet.” This indicates that at least an EF4 tornado would be required, since a sharknado would require sharks not only to be lifted, but also transported a substantial distance inland rather than merely displaced. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude $m$ and movement type $t$, call this $N_{m,t}$. The probability of a tornado having magnitude $m$ given movement type $t$ is the number of tornadoes with magnitude $m$ and movement type $t$ divided by the total number of tornadoes with movement type $t$.
 
 $$
 P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
@@ -217,6 +214,6 @@ $$
 (1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
 $$
 
-It is important to note that even this very low probability is a conservative upper estimate. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs and that a magnitude 4 tornado could lift a shark from the ocean onto land. These assumptions strongly favor the occurrence of a sharknado, since magnitude 4 tornadoes have only been observed lifting cars (objects of similar weight to sharks) several feet off the ground. [enter a source here later probably for some of this information]
+It is important to note that even this estimate represents a conservative upper bound. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs, and that an EF4 tornado is sufficient to lift a shark from the ocean onto land. These assumptions are deliberately favorable to the occurrence of a sharknado. Relaxing these large assumptions would cause this probability to converge even closer to 0.
 
 

@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./discussion.html" rel="next">
+<link href="./conclusion.html" rel="next">
 <link href="./methods.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -187,14 +187,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Discussion</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -300,7 +294,7 @@ window.Quarto = {
 </div>
 </div>
 <p>As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.</p>
-<p>Lastly, we must compute the probability the tornado is strong enough to lift a shark given that the tornado is coastal to inland. Based on <span class="citation" data-cites="fisheriesWhiteSharkNOAA2025">Fisheries (<a href="references.html#ref-fisheriesWhiteSharkNOAA2025" role="doc-biblioref">2025</a>)</span>, we see that great white sharks can be up to 4500 lbs. Based on <span class="citation" data-cites="HowMuchDoes">Quach (<a href="references.html#ref-HowMuchDoes" role="doc-biblioref">n.d.</a>)</span>, we see that cars weigh on average 4419 lbs. This suggests that the weight of these great whites is comparable to cars. From <span class="citation" data-cites="CanCarBe2025">Otero Property Adjusting &amp; Appraisals (<a href="references.html#ref-CanCarBe2025" role="doc-biblioref">2025</a>)</span>, we see that EF3 tornadoes are “likely to toss cars and trucks,” but EF4 tornadoes are “very likely to toss cars many feet.” This suggests that at least a magnitude 4 tornado would be needed, as for a sharknado to occur, we need the sharks to be picked up and tossed quite far onto land, not just to be picked up and tossed slightly. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
+<p>Lastly, we estimate the probability that a tornado is strong enough to lift a shark, conditional on it being coastal-to-inland. According to <span class="citation" data-cites="fisheriesWhiteSharkNOAA2025">Fisheries (<a href="references.html#ref-fisheriesWhiteSharkNOAA2025" role="doc-biblioref">2025</a>)</span>, great white sharks can weigh up to 4,500 lbs. Similarly, <span class="citation" data-cites="HowMuchDoes">Quach (<a href="references.html#ref-HowMuchDoes" role="doc-biblioref">n.d.</a>)</span> reports that the average car weighs approximately 4,419 lbs, suggesting that great white sharks are of comparable mass to cars. From <span class="citation" data-cites="CanCarBe2025">Otero Property Adjusting &amp; Appraisals (<a href="references.html#ref-CanCarBe2025" role="doc-biblioref">2025</a>)</span>, EF3 tornadoes are “likely to toss cars and trucks,” whereas EF4 tornadoes are “very likely to toss cars many feet.” This indicates that at least an EF4 tornado would be required, since a sharknado would require sharks not only to be lifted, but also transported a substantial distance inland rather than merely displaced. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
 <p><span class="math display">\[
 P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
 \]</span> For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.</p>
@@ -310,7 +304,7 @@ P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
 \quad
 (1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
 \]</span></p>
-<p>It is important to note that even this very low probability is a conservative upper estimate. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs and that a magnitude 4 tornado could lift a shark from the ocean onto land. These assumptions strongly favor the occurrence of a sharknado, since magnitude 4 tornadoes have only been observed lifting cars (objects of similar weight to sharks) several feet off the ground. [enter a source here later probably for some of this information]</p>
+<p>It is important to note that even this estimate represents a conservative upper bound. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs, and that an EF4 tornado is sufficient to lift a shark from the ocean onto land. These assumptions are deliberately favorable to the occurrence of a sharknado. Relaxing these large assumptions would cause this probability to converge even closer to 0.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -753,8 +747,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./discussion.html" class="pagination-link" aria-label="Discussion">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Discussion</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./conclusion.html" class="pagination-link" aria-label="Conclusion">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
