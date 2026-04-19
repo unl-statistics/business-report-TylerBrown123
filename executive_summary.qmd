@@ -1,0 +1,16 @@
+# Executive Summary
+This report estimates the probability of a “sharknado” by incorporating real-world constraints and combining the probabilities of the events required for such an occurrence. Using available tornado data and reasonable assumptions, the analysis evaluates the likelihood of three key components:
+
+1) The presence of a shark on the coast
+2) A tornado moving coastal to inland
+3) A tornado is strong enough to lift and move a shark inland
+
+The methodology excludes tornadoes with missing ending coordinates, as these observations show no bias with respect to geographic location or tornado magnitude. The analysis then sequences the relevant probabilities to estimate the overall likelihood. A key assumption is that sharks are always present when a coastal-to-inland tornado occurs, which intentionally overestimates the probability and provides a conservative upper bound.
+
+The results indicate that, even under favorable assumptions, the probability of a sharknado is effectively zero. This supports the conclusion that sharknadoes are purely fictional and pose no real-world risk.
+
+::: callout-important
+The probability of a sharknado is effectively zero. As such, no adjustments to insurance products are warranted. Resources should instead focus on higher-probability catastrophic events such as hurricanes and standard tornadoes.
+:::
+
+

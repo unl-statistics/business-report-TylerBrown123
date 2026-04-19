@@ -1,5 +1,18 @@
 # Introduction
+Extreme weather events have long piqued public and scientific interest, especially when their consequences can be extremely dangerous for human life. Among these, the concept of a "sharknado," a tornado capable of lifting sharks from the ocean and throwing them inland, represents an exaggerated but intriguing scenario. While such an event is widely seen as fictional, evaluating a sharknado's plausibility provides an opportunity to apply probabilistic reasoning within real-world constraints.
+  
+This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occuring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland.
 
-This is a book created from markdown and executable code.
+::: {#fig-sharknadoflowchart}
+```{mermaid}
+flowchart LR
+    A(Tornado forms near coast) --> B(Tornado moves inland)
+    B --> C(Tornado strong enough to lift shark)
+    C --> D(Shark present at location)
+    D --> E((SHARKNADO))
+```
 
-See @knuth84 for additional discussion of literate programming.
+Flowchart illustrating the sequence of events leading to a Sharknado.
+:::
+
+Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurrence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.
