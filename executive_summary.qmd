@@ -1,4 +1,7 @@
-# Executive Summary
+---
+title: "Executive Summary"
+format: html
+---
 This report estimates the probability of a “sharknado” by incorporating real-world constraints and combining the probabilities of the events required for such an occurrence. Using available tornado data and reasonable assumptions, the analysis evaluates the likelihood of three key components:
 
 1) The presence of a shark on the coast

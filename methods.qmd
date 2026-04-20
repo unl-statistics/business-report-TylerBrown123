@@ -1,4 +1,7 @@
-# Methods
+---
+title: "Methods"
+format: html
+---
 
 A table summarizing the tornado data from the NOAA and their possible values is below:
 ```{r, echo = FALSE}

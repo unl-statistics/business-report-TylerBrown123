@@ -1,4 +1,7 @@
-# Results
+---
+title: "Results"
+format: html
+---
 ```{r, echo = FALSE, message = FALSE, output = FALSE}
 library(gt)
 
