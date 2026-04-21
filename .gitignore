@@ -3,3 +3,5 @@ scenario-data-bkup
 .Rproj.user
 
 /.quarto/
+
+**/*.quarto_ipynb

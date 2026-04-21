@@ -3,14 +3,17 @@ project:
   output-dir: docs
 
 book:
-  title: "Evaluation of <scenario>"
+  title: "Sharknado Probability Risk Analysis"
   author: "Tyler Brown"
   page-footer:
     left: "Copyright 2026, Tyler Brown"
   chapters:
     - index.qmd
+    - executive_summary.qmd
     - intro.qmd
-    - summary.qmd
+    - methods.qmd
+    - results.qmd
+    - conclusion.qmd
     - references.qmd
   appendices:
     - draft-data-doc.qmd
@@ -22,10 +25,6 @@ bibliography: references.bib
 
 format:
   html:
-    highlight-style: a11y
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
-
-
-
+  pdf: 
+    documentclass: article
