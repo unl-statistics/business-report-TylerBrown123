@@ -2,6 +2,7 @@
 title: "Results"
 format: html
 ---
+
 ```{r, echo = FALSE, message = FALSE, output = FALSE}
 library(gt)
 
@@ -143,6 +144,10 @@ tornado_paths <- tornado_paths |>
   )
 ```
 
+::: callout
+introduce the section
+:::
+
 Now we need to compute the probabilities for each tornado type that we have classified. This can be done quite simply by dividing the number of tornadoes that we have classified to each tornado type by the total number of tornadoes. The results are summarized in the following table:
 
 ```{r, echo = FALSE}
@@ -204,12 +209,16 @@ probabilities_for_coastal_to_inland <- probabilities |>
 
 Lastly, we estimate the probability that a tornado is strong enough to lift a shark, conditional on it being coastal-to-inland. According to @fisheriesWhiteSharkNOAA2025, great white sharks can weigh up to 4,500 lbs. Similarly, @HowMuchDoes reports that the average car weighs approximately 4,419 lbs, suggesting that great white sharks are of comparable mass to cars. From @CanCarBe2025, EF3 tornadoes are “likely to toss cars and trucks,” whereas EF4 tornadoes are “very likely to toss cars many feet.” This indicates that at least an EF4 tornado would be required, since a sharknado would require sharks not only to be lifted, but also transported a substantial distance inland rather than merely displaced. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude $m$ and movement type $t$, call this $N_{m,t}$. The probability of a tornado having magnitude $m$ given movement type $t$ is the number of tornadoes with magnitude $m$ and movement type $t$ divided by the total number of tornadoes with movement type $t$.
 
+::: callout
+also mention that they have to be pulled out of water - is that possible to calculate with water being an added effect?
+:::
+
 $$
 P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
-$$
-For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.
+$$ For our specific probability we are interested in this probability where m = 4 or 5, and t = coastal to inland.
 
 Computing this probability we get:
+
 $$
 \frac{`r probabilities_for_coastal_to_inland[6,"count"]` + 0}{`r sum(probabilities_for_coastal_to_inland$count)`} 
 \approx `r round(probabilities_for_coastal_to_inland[6,"magnitude_probability_given_movement_type"], 2)`\%
@@ -217,6 +226,8 @@ $$
 (1 \text{ from magnitude 4},\ 0 \text{ from magnitude 5})
 $$
 
+::: callout
+double check how the math notation is interpreting your text visually since underscores turn the following letters or symbols into a subscript. Also what is the ending probability numerically other than converging to zero?
+:::
+
 It is important to note that even this estimate represents a conservative upper bound. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs, and that an EF4 tornado is sufficient to lift a shark from the ocean onto land. These assumptions are deliberately favorable to the occurrence of a sharknado. Relaxing these large assumptions would cause this probability to converge even closer to 0.
-
-

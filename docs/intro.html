@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bf8fa9e8249832a856e03359fc135c1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,12 +149,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -221,7 +215,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Extreme weather events have long piqued public and scientific interest, especially when their consequences can be extremely dangerous for human life. Among these, the concept of a “sharknado,” a tornado capable of lifting sharks from the ocean and throwing them inland, represents an exaggerated but intriguing scenario. While such an event is widely seen as fictional, evaluating a sharknado’s plausibility provides an opportunity to apply probabilistic reasoning within real-world constraints.</p>
-<p>This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occuring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Maybe make a reference to how it was popularized with the movie? How has it piqued public and scientific interest (references opportunity here)?</p>
+</div>
+</div>
+</div>
+<p>This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occurring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland. ::: callout fixed spelling on occurring :::</p>
 <div id="fig-sharknadoflowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sharknadoflowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -246,6 +250,16 @@ ul.task-list li input[type="checkbox"] {
 Figure&nbsp;3.1: Flowchart illustrating the sequence of events leading to a Sharknado.
 </figcaption>
 </figure>
+</div>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Maybe mention more explicitly why you are focused on the tornado moving inland since a tornado could still be a sharknado even if it doesn’t go inland. Also what about tornadoes that do both? A tornado could go off the coast and then back on as their paths are never perfectly linear</p>
+</div>
+</div>
 </div>
 <p>Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurrence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.</p>
 

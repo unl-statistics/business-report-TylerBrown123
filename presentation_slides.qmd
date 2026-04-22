@@ -1,0 +1,16 @@
+---
+title: "Sharknado Probability Risk Analysis"
+author: "Tyler Brown"
+format: revealjs
+---
+
+## General Process {.smaller}
+
+- Dividing sharknado probability into a sequence of necessary probabilities
+-
+$$
+P(\text{sharknado | tornado is coastal to inland}) = 
+P(\text{shark is present}) \times 
+P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
+$$
+}
