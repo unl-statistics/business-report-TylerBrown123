@@ -313,13 +313,82 @@ kable(
 
 - Only EF4 and EF5 tornadoes have had the ability to throw cars many feet
 
-![](great_white_shark_image.jpg){width=70%}
+
+
+::: columns
+
+::: column
+![](great_white_shark_image.jpg)
+:::
+
+::: column
+![](car_image.jpg)
+:::
+
+:::
 
 ## Probability of a Sharknado {.smaller}
 
 - This restriction allows for only one possible sharknado out of the tornadoes we have left
 
 - A sharknado is only possible in $\frac{1}{417} \approx 0.24\%$ of coastal to inland tornadoes.
+
+- This tornado occurred in Florida on April 4, 1966
+
+```{r, fig.height = 6}
+florida_tornado <- tornado_paths |>
+  filter(mag == 4 & movement == "Coastal_to_Inland")
+
+florida <- map_data("state") |>
+  filter(region == "florida")
+
+ggplot() +
+  geom_polygon(
+    data = florida,
+    aes(x = long, y = lat, group = group),
+    fill = NA,
+    color = "black",
+    linewidth = 0.3
+  ) +
+  geom_point(
+    data = florida_tornado,
+    aes(x = slon, y = slat),
+    color = "red",
+    size = 3
+  ) +
+  geom_point(
+    data = florida_tornado,
+    aes(x = elon, y = elat),
+    color = "blue",
+    size = 3
+  ) +
+    geom_text(
+    data = florida_tornado,
+    aes(x = slon, y = slat, label = "Start"),
+    vjust = -1,
+    color = "red"
+  ) +
+  geom_text(
+    data = florida_tornado,
+    aes(x = elon, y = elat, label = "End"),
+    vjust = -1,
+    color = "blue"
+  ) +
+  labs(
+    title = "Only Possible Sharknado Tornado Found",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+## Conclusion {.smaller}
+
+- Even under favorables assumptions, the risk of a sharknado remains extremely low
+
+- Assumption of sharks being constantly available on the coast represent a significant overestimation
+
+- Analysis could be improved with the distribution of shark locations and physics based modeling of wind speeds required to lift sharks out of the water 
+
 
 
 
