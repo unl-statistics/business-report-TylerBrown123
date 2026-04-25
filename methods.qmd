@@ -9,7 +9,9 @@ maybe introduce this section better and the table? Seems outta place, like a quo
 
 A table summarizing the tornado data from the NOAA and their possible values is below:
 
-```{r, echo = FALSE}
+```{r, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(maps)
 library(gt)
 
 tornado_vars <- data.frame(
@@ -65,15 +67,18 @@ tornado_vars %>%
 
 In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.
 
-![](0_latitude_0_longitude_picture.jpg) As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
+::: {#fig-0_lat_long}
+![](0_latitude_0_longitude_picture.jpg)
 
-::: callout
-awesome analysis and mention of missingness
+Figure: red lines showing 0 latitude and 0 longitude on a map
 :::
 
-```{r, message = FALSE, echo = FALSE}
+As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
+
+```{r, echo = FALSE}
+#| label: fig-tornado-all
+#| fig-cap: "Starting locations of all tornadoes in the continental United States."
 # Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
-library(tidyverse)
 
 tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv") |>
   filter(!st %in% c("AK", "HI", "PR", "VI"))
@@ -87,48 +92,89 @@ tornado_paths <- tornado_paths |>
 tornado_paths <- tornado_paths |>
   mutate(end_missing = (elat == 0 | elon == 0))
 
-ggplot(tornado_paths, aes(x = slon, y = slat)) +
-  geom_point(color = "red", alpha = 0.5) +
+us_states <- map_data("state")
+
+ggplot() +
+  geom_polygon(data = us_states,
+               aes(x = long, y = lat, group = group),
+               fill = NA, color = "black", linewidth = 0.3) +
+  geom_point(data = tornado_paths,
+             aes(x = slon, y = slat),
+             color = "red", alpha = 0.5, size = 0.05) +
+  
   labs(title = "Starting Location For All Tornadoes",
-       x = "Starting Longitude", y = "Starting Latitude") +
+       x = "Longitude", y = "Latitude") +
   theme_minimal()
 
 ```
 
-::: callout
-potentially make the dots smaller and overlay the borders of the US so you can see which are on land or not?
-:::
 
 ```{r, echo = FALSE}
-ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
-       aes(x = slon, y = slat)) +
-  geom_point(color = "red", alpha = 0.5) +
-  labs(title = "Starting Location For Tornadoes With Missing End Coordinates",
-       x = "Starting Longitude", y = "Starting Latitude") +
+#| label: fig-tornado-missingend
+#| fig-cap: "Starting locations of tornadoes with missing end coordinates."
+ggplot() +
+  geom_polygon(data = us_states,
+               aes(x = long, y = lat, group = group),
+               fill = NA, color = "black", linewidth = 0.3) +
+  geom_point(data = tornado_paths |> 
+               filter(elat == 0 | elon == 0),
+             aes(x = slon, y = slat),
+             color = "red",
+             alpha = 0.5,
+             size = 0.05) +
+  
+  labs(title = "Starting Locations of Tornadoes with Missing End Coordinates",
+       x = "Longitude", y = "Latitude") +
   theme_minimal()
 ```
 
 There is no apparent trend in the missing end coordinates. Their geographic distribution is similar to that of all tornadoes, suggesting that the first concern is alleviated.
 
-To address the second concern regarding magnitude, plots can be created for each magnitude level to examine whether the incidence of missing end coordinates differs across magnitudes.
+To address the second concern regarding magnitude, we can create plots for each magnitude level to examine whether the rate of missing end coordinates varies by magnitude, when compared to the overall pattern in the full dataset.
 
 ```{r, echo = FALSE}
+#| label: fig-tornado-allmagnitude
+#| fig-cap: "Starting locations of all tornadoes in the continental United States grouped by magnitude on EF scale"
 library(ggtext)
-ggplot(
-  tornado_paths |> 
-    filter(elat == 0 | elon == 0),
-  aes(x = slon, y = slat)
-) +
-  geom_point(color = "red", alpha = 0.5) +
+ggplot() +
+  geom_polygon(data = us_states,
+               aes(x = long, y = lat, group = group),
+               fill = "gray95", color = "black", linewidth = 0.3) +
+  geom_point(data = tornado_paths |> 
+               filter(mag != -9),
+             aes(x = slon, y = slat),
+             color = "red",
+             alpha = 0.5,
+             size = 0.05) +
   facet_wrap(~ mag) +
+  
   labs(
-    title = "Starting Location For Tornadoes With Missing End Coordinates (by Magnitude)",
-    x = "Starting Longitude", 
-    y = "Starting Latitude"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_markdown()
+    title = "Starting Location All Tornadoes Grouped by Magnitude",
+    x = "Longitude", 
+    y = "Latitude"
+  )
+```
+
+```{r, echo = FALSE}
+#| label: fig-tornado-allmagnitudemissingend
+#| fig-cap: "Starting locations of tornadoes with missing end coordinates grouped by magnitude on EF scale"
+library(ggtext)
+ggplot() +
+  geom_polygon(data = us_states,
+               aes(x = long, y = lat, group = group),
+               fill = "gray95", color = "black", linewidth = 0.3) +
+  geom_point(data = tornado_paths |> 
+               filter(elat == 0 | elon == 0),
+             aes(x = slon, y = slat),
+             color = "red",
+             alpha = 0.5,
+             size = 0.1) +
+  facet_wrap(~ mag) +
+  
+  labs(
+    title = "Starting Location for Tornadoes with Missing End Coordinates Grouped by Magnitude",
+    x = "Longitude", 
+    y = "Latitude"
   )
 ```
 
@@ -136,7 +182,7 @@ ggplot(
 There are no tornadoes with a recorded magnitude of -9 (unknown) that also have missing end coordinates.
 :::
 
-From these plots, there are no substantial differences in geographic distribution across magnitudes. This alleviates the second concern, indicating that removing these tornadoes will not meaningfully affect inference on the probability of a sharknado.
+From these plots, it appears that higher magnitude tornadoes occur more frequently in the Midwest and South and less often on the West Coast. However, this pattern is consistent with the plots of all tornadoes separated by magnitude. Therefore, while there is some variation by magnitude, excluding tornadoes with missing end coordinates should not heavily bias the analysis, as the trend in magnitude are similar between the full dataset and the subset with missing end coordinates.
 
 ```{r, message = FALSE, echo = FALSE}
 # Transforming latitude and longitude into math ready quantities
@@ -181,11 +227,9 @@ $$
 P(\text{sharknado | tornado is coastal to inland}) = 
 P(\text{shark is present}) \times 
 P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
-$$ The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on this conditional framework.
+$$ 
 
-::: callout
-sharknados? spelling error
-:::
+The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on this conditional framework.
 
 To obtain a conservative upper bound on this probability, we assume that $P(\text{shark is present}) = 1$. In other words, we assume that whenever a coastal-to-inland tornado occurs, a shark is present near the coast and available to be lifted. While this assumption is unrealistic, it provides an upper bound on the probability of a sharknado. This strengthens the conclusion if the resulting probability remains small.
 
@@ -222,17 +266,58 @@ how are you determining which direction from the coast? away from the coast coul
 | Other | Could be either | Could be either | Doesn’t meet the 2 criteria for either group |
 
 ::: {style="text-align:center;"}
+
 <img src="usmap_with_vectors.jpg" width="500"/>
+
+<br>
+
+<span style="color:red;">Coastal to Inland</span> |
+<span style="color:blue;">Inland to Coastal</span>
+
 :::
-
-<p style="text-align:center;">
-
-[Coastal to Inland]{style="color:red;"} \| [Inland to Coastal]{style="color:blue;"}
-
-</p>
 
 ::: callout
 include transition into the next section
 
 also, overall would like to see some outside research on methods and why selecting this one
 :::
+
+
+
+
+
+
+```{r}
+florida_tornado <- tornado_paths |>
+  filter(mag == 4 & movement == "Coastal_to_Inland")
+
+florida <- map_data("state") |>
+  filter(region == "florida")
+
+ggplot() +
+  geom_polygon(
+    data = florida,
+    aes(x = long, y = lat, group = group),
+    fill = NA,
+    color = "black",
+    linewidth = 0.3
+  ) +
+  geom_point(
+    data = florida_tornado,
+    aes(x = slon, y = slat),
+    color = "red",
+    size = 3
+  ) +
+  geom_point(
+    data = florida_tornado,
+    aes(x = elon, y = elat),
+    color = "blue",
+    size = 3
+  ) +
+  labs(
+    title = "Only Possible Sharknado Tornado Found",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+

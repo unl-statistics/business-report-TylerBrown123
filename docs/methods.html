@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -253,23 +288,23 @@ window.Quarto = {
 <p>A table summarizing the tornado data from the NOAA and their possible values is below:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="nqchvahisf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nqchvahisf table {
+<div id="tbcubdrpzx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tbcubdrpzx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nqchvahisf thead, #nqchvahisf tbody, #nqchvahisf tfoot, #nqchvahisf tr, #nqchvahisf td, #nqchvahisf th {
+#tbcubdrpzx thead, #tbcubdrpzx tbody, #tbcubdrpzx tfoot, #tbcubdrpzx tr, #tbcubdrpzx td, #tbcubdrpzx th {
   border-style: none;
 }
 
-#nqchvahisf p {
+#tbcubdrpzx p {
   margin: 0;
   padding: 0;
 }
 
-#nqchvahisf .gt_table {
+#tbcubdrpzx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -295,12 +330,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_caption {
+#tbcubdrpzx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nqchvahisf .gt_title {
+#tbcubdrpzx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -312,7 +347,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#nqchvahisf .gt_subtitle {
+#tbcubdrpzx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -324,7 +359,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#nqchvahisf .gt_heading {
+#tbcubdrpzx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -336,13 +371,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_bottom_border {
+#tbcubdrpzx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_col_headings {
+#tbcubdrpzx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -357,7 +392,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_col_heading {
+#tbcubdrpzx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -377,7 +412,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nqchvahisf .gt_column_spanner_outer {
+#tbcubdrpzx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -389,15 +424,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#nqchvahisf .gt_column_spanner_outer:first-child {
+#tbcubdrpzx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nqchvahisf .gt_column_spanner_outer:last-child {
+#tbcubdrpzx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nqchvahisf .gt_column_spanner {
+#tbcubdrpzx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -409,11 +444,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#nqchvahisf .gt_spanner_row {
+#tbcubdrpzx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nqchvahisf .gt_group_heading {
+#tbcubdrpzx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -439,7 +474,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#nqchvahisf .gt_empty_group_heading {
+#tbcubdrpzx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -454,15 +489,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#nqchvahisf .gt_from_md > :first-child {
+#tbcubdrpzx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nqchvahisf .gt_from_md > :last-child {
+#tbcubdrpzx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nqchvahisf .gt_row {
+#tbcubdrpzx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,7 +516,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#nqchvahisf .gt_stub {
+#tbcubdrpzx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -494,7 +529,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nqchvahisf .gt_stub_row_group {
+#tbcubdrpzx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -508,15 +543,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#nqchvahisf .gt_row_group_first td {
+#tbcubdrpzx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nqchvahisf .gt_row_group_first th {
+#tbcubdrpzx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nqchvahisf .gt_summary_row {
+#tbcubdrpzx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -526,16 +561,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nqchvahisf .gt_first_summary_row {
+#tbcubdrpzx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_first_summary_row.thick {
+#tbcubdrpzx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nqchvahisf .gt_last_summary_row {
+#tbcubdrpzx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -545,7 +580,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_grand_summary_row {
+#tbcubdrpzx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -555,7 +590,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nqchvahisf .gt_first_grand_summary_row {
+#tbcubdrpzx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -565,7 +600,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_last_grand_summary_row_top {
+#tbcubdrpzx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -575,11 +610,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_striped {
+#tbcubdrpzx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nqchvahisf .gt_table_body {
+#tbcubdrpzx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -588,7 +623,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_footnotes {
+#tbcubdrpzx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -602,7 +637,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_footnote {
+#tbcubdrpzx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -611,7 +646,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nqchvahisf .gt_sourcenotes {
+#tbcubdrpzx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -625,7 +660,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#nqchvahisf .gt_sourcenote {
+#tbcubdrpzx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -633,72 +668,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#nqchvahisf .gt_left {
+#tbcubdrpzx .gt_left {
   text-align: left;
 }
 
-#nqchvahisf .gt_center {
+#tbcubdrpzx .gt_center {
   text-align: center;
 }
 
-#nqchvahisf .gt_right {
+#tbcubdrpzx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nqchvahisf .gt_font_normal {
+#tbcubdrpzx .gt_font_normal {
   font-weight: normal;
 }
 
-#nqchvahisf .gt_font_bold {
+#tbcubdrpzx .gt_font_bold {
   font-weight: bold;
 }
 
-#nqchvahisf .gt_font_italic {
+#tbcubdrpzx .gt_font_italic {
   font-style: italic;
 }
 
-#nqchvahisf .gt_super {
+#tbcubdrpzx .gt_super {
   font-size: 65%;
 }
 
-#nqchvahisf .gt_footnote_marks {
+#tbcubdrpzx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nqchvahisf .gt_asterisk {
+#tbcubdrpzx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nqchvahisf .gt_indent_1 {
+#tbcubdrpzx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nqchvahisf .gt_indent_2 {
+#tbcubdrpzx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nqchvahisf .gt_indent_3 {
+#tbcubdrpzx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nqchvahisf .gt_indent_4 {
+#tbcubdrpzx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nqchvahisf .gt_indent_5 {
+#tbcubdrpzx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nqchvahisf .katex-display {
+#tbcubdrpzx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nqchvahisf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tbcubdrpzx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -783,52 +818,71 @@ window.Quarto = {
 </div>
 </div>
 <p>In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as “0” instead of “NA”. This can’t be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.</p>
-<p><img src="0_latitude_0_longitude_picture.jpg" class="img-fluid"> As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div id="fig-0_lat_long" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-0_lat_long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="0_latitude_0_longitude_picture.jpg" class="img-fluid figure-img">
 </div>
-<div class="callout-body-container">
-<p>awesome analysis and mention of missingness</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-0_lat_long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Figure: red lines showing 0 latitude and 0 longitude on a map
+</figcaption>
+</figure>
 </div>
-</div>
-</div>
+<p>As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="methods_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-tornado-all" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tornado-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="methods_files/figure-html/fig-tornado-all-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tornado-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Starting locations of all tornadoes in the continental United States.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>potentially make the dots smaller and overlay the borders of the US so you can see which are on land or not?</p>
-</div>
-</div>
-</div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="methods_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-tornado-missingend" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tornado-missingend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="methods_files/figure-html/fig-tornado-missingend-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tornado-missingend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: Starting locations of tornadoes with missing end coordinates.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>There is no apparent trend in the missing end coordinates. Their geographic distribution is similar to that of all tornadoes, suggesting that the first concern is alleviated.</p>
-<p>To address the second concern regarding magnitude, plots can be created for each magnitude level to examine whether the incidence of missing end coordinates differs across magnitudes.</p>
+<p>To address the second concern regarding magnitude, we can create plots for each magnitude level to examine whether the rate of missing end coordinates varies by magnitude, when compared to the overall pattern in the full dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="methods_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-tornado-allmagnitude" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tornado-allmagnitude-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="methods_files/figure-html/fig-tornado-allmagnitude-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tornado-allmagnitude-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Starting locations of all tornadoes in the continental United States grouped by magnitude on EF scale
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-tornado-allmagnitudemissingend" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tornado-allmagnitudemissingend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="methods_files/figure-html/fig-tornado-allmagnitudemissingend-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tornado-allmagnitudemissingend-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Starting locations of tornadoes with missing end coordinates grouped by magnitude on EF scale
+</figcaption>
 </figure>
 </div>
 </div>
@@ -846,7 +900,7 @@ Note
 <p>There are no tornadoes with a recorded magnitude of -9 (unknown) that also have missing end coordinates.</p>
 </div>
 </div>
-<p>From these plots, there are no substantial differences in geographic distribution across magnitudes. This alleviates the second concern, indicating that removing these tornadoes will not meaningfully affect inference on the probability of a sharknado.</p>
+<p>From these plots, it appears that higher magnitude tornadoes occur more frequently in the Midwest and South and less often on the West Coast. However, this pattern is consistent with the plots of all tornadoes separated by magnitude. Therefore, while there is some variation by magnitude, excluding tornadoes with missing end coordinates should not heavily bias the analysis, as the trend in magnitude are similar between the full dataset and the subset with missing end coordinates.</p>
 <p>To examine the potential risk of a sharknado, we compute the probability of such an event occurring. From the perspective of any tornado occurring in the United States, this probability can be expressed as the product of several individual probabilities: <span class="math display">\[
 P(\text{sharknado}) =
 P(\text{shark is present}) \times
@@ -857,17 +911,8 @@ P(\text{tornado is strong enough to lift a shark})
 P(\text{sharknado | tornado is coastal to inland}) =
 P(\text{shark is present}) \times
 P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
-\]</span> The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on this conditional framework.</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>sharknados? spelling error</p>
-</div>
-</div>
-</div>
+\]</span></p>
+<p>The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on this conditional framework.</p>
 <p>To obtain a conservative upper bound on this probability, we assume that <span class="math inline">\(P(\text{shark is present}) = 1\)</span>. In other words, we assume that whenever a coastal-to-inland tornado occurs, a shark is present near the coast and available to be lifted. While this assumption is unrealistic, it provides an upper bound on the probability of a sharknado. This strengthens the conclusion if the resulting probability remains small.</p>
 <p>To begin, we classify each tornado as coastal-to-inland, inland-to-coastal, or neither. While this could be simplified to a binary classification (coastal-to-inland versus not coastal-to-inland), we include the inland-to-coastal category for completeness and to allow comparison between movement directions.</p>
 <p>The classification threshold for “coastal-to-inland” tornadoes requires that the tornado’s starting location be within 10,000 meters of the nearest coast and that its ending location be farther from the coast than its starting location. Similarly, tornadoes are classified as “inland-to-coastal” if their starting location is more than 10,000 meters from the nearest coast and their ending location is closer to the coast than their starting location.</p>
@@ -919,10 +964,9 @@ P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland}
 </table>
 <div style="text-align:center;">
 <p><img src="usmap_with_vectors.jpg" width="500"></p>
+<p><br></p>
+<p><span style="color:red;">Coastal to Inland</span> | <span style="color:blue;">Inland to Coastal</span></p>
 </div>
-<p style="text-align:center;">
-</p><p><span style="color:red;">Coastal to Inland</span> | <span style="color:blue;">Inland to Coastal</span></p>
-<p></p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -931,6 +975,46 @@ P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland}
 <div class="callout-body-container">
 <p>include transition into the next section</p>
 <p>also, overall would like to see some outside research on methods and why selecting this one</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>florida_tornado <span class="ot">&lt;-</span> tornado_paths <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mag <span class="sc">==</span> <span class="dv">4</span> <span class="sc">&amp;</span> movement <span class="sc">==</span> <span class="st">"Coastal_to_Inland"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>florida <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"state"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"florida"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> florida,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.3</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> florida_tornado,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> slon, <span class="at">y =</span> slat),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> florida_tornado,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> elon, <span class="at">y =</span> elat),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Only Possible Sharknado Tornado Found"</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Longitude"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Latitude"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="methods_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
