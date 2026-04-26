@@ -389,6 +389,8 @@ ggplot() +
 
 - Analysis could be improved with the distribution of shark locations and physics based modeling of wind speeds required to lift sharks out of the water 
 
+- no adjustment to insurance products is needed and time and resources should be spent on other more likely natural disasters
+
 
 
 
