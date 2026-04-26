@@ -14,6 +14,7 @@ book:
     - methods.qmd
     - results.qmd
     - conclusion.qmd
+    - presentation_slides.qmd
   appendices:
     - draft-data-doc.qmd
     - draft-results.qmd
