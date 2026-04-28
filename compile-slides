@@ -1,0 +1,5 @@
+#!/bin/bash
+
+quarto render presentation_slides.qmd
+mv presentation_slides.html docs/
+mv presentation_slides_files docs/

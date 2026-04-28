@@ -63,7 +63,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bf8fa9e8249832a856e03359fc135c1e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -194,6 +194,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -301,7 +307,7 @@ window.Quarto = {
 </div>
 </div>
 <p>As shown, there are far fewer coastal-to-inland tornadoes compared with inland-to-coastal and other tornadoes. This relatively small amount reflects the strict requirement that the tornado must start within a short distance of the coast to be classified in this category.</p>
-<p>Lastly, we estimate the probability that a tornado is strong enough to lift a shark, conditional on it being coastal-to-inland. According to <span class="citation" data-cites="fisheriesWhiteSharkNOAA2025">NOAA Fisheries (<a href="#ref-fisheriesWhiteSharkNOAA2025" role="doc-biblioref">2025</a>)</span>, great white sharks can weigh up to 4,500 lbs. Similarly, <span class="citation" data-cites="HowMuchDoes">Quach (<a href="#ref-HowMuchDoes" role="doc-biblioref">2025</a>)</span> reports that the average car weighs approximately 4,419 lbs, suggesting that great white sharks are of comparable mass to cars. From <span class="citation" data-cites="CanCarBe2025">Otero Property Adjusting &amp; Appraisals (<a href="#ref-CanCarBe2025" role="doc-biblioref">2025</a>)</span>, EF3 tornadoes are “likely to toss cars and trucks,” whereas EF4 tornadoes are “very likely to toss cars many feet.” This indicates that at least an EF4 tornado would be required, since a sharknado would require sharks not only to be lifted, but also transported a substantial distance inland rather than merely displaced. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
+<p>Lastly, we estimate the probability that a tornado is strong enough to lift a shark, conditional on it being coastal-to-inland. According to <span class="citation" data-cites="fisheriesWhiteSharkNOAA2025">NOAA Fisheries (<a href="references.html#ref-fisheriesWhiteSharkNOAA2025" role="doc-biblioref">2025</a>)</span>, great white sharks can weigh up to 4,500 lbs. Similarly, <span class="citation" data-cites="HowMuchDoes">Quach (<a href="references.html#ref-HowMuchDoes" role="doc-biblioref">2025</a>)</span> reports that the average car weighs approximately 4,419 lbs, suggesting that great white sharks are of comparable mass to cars. From <span class="citation" data-cites="CanCarBe2025">Otero Property Adjusting &amp; Appraisals (<a href="references.html#ref-CanCarBe2025" role="doc-biblioref">2025</a>)</span>, EF3 tornadoes are “likely to toss cars and trucks,” whereas EF4 tornadoes are “very likely to toss cars many feet.” This indicates that at least an EF4 tornado would be required, since a sharknado would require sharks not only to be lifted, but also transported a substantial distance inland rather than merely displaced. To compute this probability, we first have to define the number of tornadoes for each combination of magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span>, call this <span class="math inline">\(N_{m,t}\)</span>. The probability of a tornado having magnitude <span class="math inline">\(m\)</span> given movement type <span class="math inline">\(t\)</span> is the number of tornadoes with magnitude <span class="math inline">\(m\)</span> and movement type <span class="math inline">\(t\)</span> divided by the total number of tornadoes with movement type <span class="math inline">\(t\)</span>.</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -335,7 +341,7 @@ P(\text{Magnitude} = m|\text{Movement} = t) = \frac{N_{m,t}}{\sum_{m} N_{m,t}}
 <p>It is important to note that even this estimate represents a conservative upper bound. We assume that a shark is present along the coast whenever a coastal-to-inland tornado occurs, and that an EF4 tornado is sufficient to lift a shark from the ocean onto land. These assumptions are deliberately favorable to the occurrence of a sharknado. Relaxing these large assumptions would cause this probability to converge even closer to 0.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-fisheriesWhiteSharkNOAA2025" class="csl-entry" role="listitem">
 NOAA Fisheries. 2025. <span>“White Shark <span></span> <span>NOAA</span> Fisheries. <span>NOAA</span>.”</span> February 19. <a href="https://www.fisheries.noaa.gov/species/white-shark">https://www.fisheries.noaa.gov/species/white-shark</a>.
 </div>
