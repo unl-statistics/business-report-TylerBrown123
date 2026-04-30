@@ -1,6 +1,8 @@
 project:
   type: book  
   output-dir: docs
+  post-render:
+    - ./compile-slides
 
 book:
   title: "Sharknado Probability Risk Analysis"
@@ -21,6 +23,9 @@ book:
     - draft-exec-summary.qmd
 
 bibliography: references.bib
+
+execute:
+    freeze: auto
 
 format:
   html:

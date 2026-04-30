@@ -1,0 +1,17 @@
+{
+  "hash": "7009f4abae1a106f8b4ea1d3bd6cd22b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Executive Summary\"\nformat: html\n---\n\nThis report estimates the probability of a “sharknado” by incorporating real-world constraints and combining the probabilities of the events required for such an occurrence. Using available tornado data and reasonable assumptions, the analysis evaluates the likelihood of three key components:\n\n1)  The presence of a shark on the coast\n2)  A tornado moving coastal to inland\n3)  A tornado is strong enough to lift and move a shark inland\n\nThe analysis sequences the relevant probabilities to estimate the overall likelihood. A key assumption is that sharks are always present when a coastal-to-inland tornado occurs, which intentionally overestimates the probability and provides a conservative upper bound. The results indicate that, even under favorable assumptions, the probability of a sharknado is effectively zero. Only one tornado since 1950 shows the possibility of being a sharknado, an EF4 tornado from Florida in 1966.\n\n\n\n::: {.cell}\n\n:::\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\n::: callout-important\nThe probability of a sharknado is effectively zero. As such, no adjustments to insurance products are warranted. Resources should instead focus on higher-probability catastrophic events such as hurricanes and standard tornadoes.\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

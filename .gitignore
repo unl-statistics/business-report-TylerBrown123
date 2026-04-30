@@ -1,7 +1,9 @@
-*_files/
+/*_files
 scenario-data-bkup
 .Rproj.user
 
 /.quarto/
 
 **/*.quarto_ipynb
+/*_cache
+*.log
