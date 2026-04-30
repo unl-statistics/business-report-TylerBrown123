@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction – Sharknado Probability Risk Analysis</title>
+<title>References – Sharknado Probability Risk Analysis</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,7 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -33,8 +52,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./methods.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./draft-data-doc.html" rel="next">
+<link href="./conclusion.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,9 +91,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -88,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -121,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -145,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -197,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title">References</h1>
 </div>
 
 
@@ -214,34 +230,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Extreme weather events have long piqued public and scientific interest, especially when their consequences can be extremely dangerous for human life. Among these, the concept of a “sharknado,” a tornado capable of lifting sharks from the ocean and throwing them inland, represents an exaggerated but intriguing scenario. While such an event is widely seen as fictional, evaluating a sharknado’s plausibility provides an opportunity to apply probabilistic reasoning within real-world constraints.</p>
-<p>This project aims to estimate the probability of a sharknado occurring by breaking up the phenomenon into a sequence of events that need to occur. In the methods section, we outline the sequence of these probabilities. These include the probability of a tornado forming near a coastal region and moving inward, the probability that such a tornado reaches a sufficient intensity to pick up and move a shark, and the assumption that a shark is present at the exact location required. To ensure a conservative upper estimate for this probability, several assumptions are intentionally biased in favor of the event occurring, such as a constant availability of sharks along coastlines and the ability for high magnitude earthquakes to pick them up and transport them inland.</p>
-<div id="fig-sharknadoflowchart" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-sharknadoflowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A(Tornado forms near coast) --&gt; B(Tornado moves inland)
-    B --&gt; C(Tornado strong enough to lift shark)
-    C --&gt; D(Shark present at location)
-    D --&gt; E((SHARKNADO))
-</pre>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-fisheriesWhiteSharkNOAA2025" class="csl-entry" role="listitem">
+NOAA Fisheries. 2025. <span>“White Shark <span></span> <span>NOAA</span>
+Fisheries. <span>NOAA</span>.”</span> February 19. <a href="https://www.fisheries.noaa.gov/species/white-shark">https://www.fisheries.noaa.gov/species/white-shark</a>.
 </div>
-<p></p></figure><p></p>
+<div id="ref-CanCarBe2025" class="csl-entry" role="listitem">
+Otero Property Adjusting &amp; Appraisals. 2025. <span>“Can a Car Be
+Picked up by a Tornado?”</span> November 6. <a href="https://oteroadjusting.com/can-a-car-be-picked-up-by-a-tornado/">https://oteroadjusting.com/can-a-car-be-picked-up-by-a-tornado/</a>.
+</div>
+<div id="ref-HowMuchDoes" class="csl-entry" role="listitem">
+Quach, Jacqueline. 2025. <span>“How Much Does the Average Car Weigh?
+<span>AutoInsurance</span>.com.”</span> April 29. <a href="https://www.autoinsurance.com/guide/average-car-weight/">https://www.autoinsurance.com/guide/average-car-weight/</a>.
+</div>
+<div id="ref-StormPredictionCenter" class="csl-entry" role="listitem">
+<span>“Storm Prediction Center Maps, Graphics, and Data Page.”</span>
+n.d. Accessed February 23, 2026. <a href="https://www.spc.noaa.gov/wcm/#data">https://www.spc.noaa.gov/wcm/#data</a>.
 </div>
 </div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sharknadoflowchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.1: Flowchart illustrating the sequence of events leading to a Sharknado.
-</figcaption>
-</figure>
-</div>
-<p>Using a combination of probabilistic reasoning and simplifying assumptions, the analysis synthesizes these individual components into an overall estimate for the probability of the occurrence of a sharknado. These results provide insight not only into the probability of a sharknado, but also into how compounding rare events together quickly diminishes the overall probability.</p>
 
 
 
@@ -648,13 +654,13 @@ Figure&nbsp;2.1: Flowchart illustrating the sequence of events leading to a Shar
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Executive Summary">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Executive Summary</span></span>
+      <a href="./conclusion.html" class="pagination-link" aria-label="Conclusion">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./methods.html" class="pagination-link" aria-label="Methods">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./draft-data-doc.html" class="pagination-link" aria-label="Draft: Data Documentation">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Draft: Data Documentation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

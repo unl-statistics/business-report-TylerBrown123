@@ -3,16 +3,15 @@ title: "Methods"
 format: html
 ---
 
-::: callout
-maybe introduce this section better and the table? Seems outta place, like a quote bomb but a table bomb
-:::
+## Data Summary
 
-A table summarizing the tornado data from the NOAA and their possible values is below:
+The data used in this study were obtained from the National Oceanic and Atmospheric Administration, specifically the Storm Prediction Center Tornado Database. This data set includes all recorded tornado events in the United States from 1950 to 2024, along with variables such as location, starting and ending coordinates, magnitude, and date of occurrence. A summary table of the data set is provided below.
 
 ```{r, message = FALSE, echo = FALSE}
 library(tidyverse)
 library(maps)
 library(gt)
+library(ggthemes)
 
 tornado_vars <- data.frame(
   Variable = c("yr", "date", "st", "mag", "slat", "slon", "elat", "elon", "len", "wid"),
@@ -63,9 +62,22 @@ tornado_vars %>%
     ),
     locations = cells_column_labels(everything())
   )
+
+tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv") |>
+  filter(!st %in% c("AK", "HI", "PR", "VI"))
+
+tornado_paths <- tornado_full_data |>
+  distinct(slat, slon, elat, elon, .keep_all = TRUE)
+
+tornado_paths <- tornado_paths |>
+  select(slat, slon, elat, elon, mag)
+
+tornado_paths <- tornado_paths |>
+  mutate(end_missing = (elat == 0 | elon == 0))
+
 ```
 
-In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and logitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect the US anywhere. The red dotted lines below show 0 latitude and and 0 longitude.
+In the original US tornado data set from the NOAA, many tornadoes have missing ending latitudes and longitudes, specifically they were marked as "0" instead of "NA". This can't be right however since the 0 latitude line and the 0 longitude line do not intersect North America anywhere. @fig-0_lat_long below shows the 0 latitude and 0 longitude lines.
 
 ::: {#fig-0_lat_long}
 ![](0_latitude_0_longitude_picture.jpg)
@@ -73,7 +85,13 @@ In the original US tornado data set from the NOAA, many tornadoes have missing e
 Figure: red lines showing 0 latitude and 0 longitude on a map
 :::
 
-As such, these tornadoes in the data set are taken to be rows with missing values. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. One of these shows the location of all tornadoes in the data set, and the other shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
+```{r, echo = FALSE}
+sum_missing_end_coordinates <- sum(tornado_paths$end_missing)
+total_number_tornadoes <- nrow(tornado_paths)
+probability_missing_end_coordinate <- 100*sum_missing_end_coordinates/total_number_tornadoes
+```
+
+As such, these tornadoes in the data set are taken to be rows with missing values. The total percentage of missing end coordinates relative to the entire data set is $\frac{`r sum_missing_end_coordinates`}{`r total_number_tornadoes`}$ ≈ `r round(probability_missing_end_coordinate, 2)`\%. It should be examined whether these tornadoes have some sort of trend relative to the other tornadoes in the data set, so that it can be determined if they can be removed without worry. Specifically, there are two possible concerns: whether tornadoes in a certain area have a significantly higher chance of missing end values, and whether tornadoes of different magnitudes are more likely to have missing end coordinates than others. To examine the first concern, two figures can be created. @fig-tornado-all shows the location of all tornadoes in the data set, and @fig-tornado-missingend shows the location of only the tornadoes that have a missing value for the ending latitude or longitude.
 
 ```{r, echo = FALSE}
 #| label: fig-tornado-all
@@ -100,11 +118,12 @@ ggplot() +
                fill = NA, color = "black", linewidth = 0.3) +
   geom_point(data = tornado_paths,
              aes(x = slon, y = slat),
-             color = "red", alpha = 0.5, size = 0.05) +
+             color = "red", alpha = 0.3, size = 0.05) +
   
   labs(title = "Starting Location For All Tornadoes",
        x = "Longitude", y = "Latitude") +
-  theme_minimal()
+  theme_minimal() +
+  theme_map()
 
 ```
 
@@ -125,12 +144,13 @@ ggplot() +
   
   labs(title = "Starting Locations of Tornadoes with Missing End Coordinates",
        x = "Longitude", y = "Latitude") +
-  theme_minimal()
+  theme_minimal() +
+  theme_map()
 ```
 
 There is no apparent trend in the missing end coordinates. Their geographic distribution is similar to that of all tornadoes, suggesting that the first concern is alleviated.
 
-To address the second concern regarding magnitude, we can create plots for each magnitude level to examine whether the rate of missing end coordinates varies by magnitude, when compared to the overall pattern in the full dataset.
+To address the second concern regarding magnitude, we create plots for each magnitude level (see @fig-tornado-allmagnitude and @fig-tornado-allmagnitudemissingend) to examine whether the rate of missing end coordinates varies by magnitude compared to the overall pattern in the full dataset.
 
 ```{r, echo = FALSE}
 #| label: fig-tornado-allmagnitude
@@ -152,7 +172,8 @@ ggplot() +
     title = "Starting Location All Tornadoes Grouped by Magnitude",
     x = "Longitude", 
     y = "Latitude"
-  )
+  ) + theme_minimal() +
+  theme_map()
 ```
 
 ```{r, echo = FALSE}
@@ -175,14 +196,15 @@ ggplot() +
     title = "Starting Location for Tornadoes with Missing End Coordinates Grouped by Magnitude",
     x = "Longitude", 
     y = "Latitude"
-  )
+  ) + theme_minimal() +
+  theme_map()
 ```
 
 ::: callout-note
 There are no tornadoes with a recorded magnitude of -9 (unknown) that also have missing end coordinates.
 :::
 
-From these plots, it appears that higher magnitude tornadoes occur more frequently in the Midwest and South and less often on the West Coast. However, this pattern is consistent with the plots of all tornadoes separated by magnitude. Therefore, while there is some variation by magnitude, excluding tornadoes with missing end coordinates should not heavily bias the analysis, as the trend in magnitude are similar between the full dataset and the subset with missing end coordinates.
+From these plots, it appears that higher magnitude tornadoes occur more frequently in the Midwest and South and less often on the West Coast. However, this pattern is consistent with the plots of all tornadoes separated by magnitude. Therefore, while there is some variation by magnitude, excluding tornadoes with missing end coordinates should not heavily bias the analysis, as the trends in magnitude are similar between the full data set and the subset with missing end coordinates.
 
 ```{r, message = FALSE, echo = FALSE}
 # Transforming latitude and longitude into math ready quantities
@@ -216,18 +238,26 @@ coast_m <- ne_coastline(returnclass = "sf") |>
   st_transform(5070)
 ```
 
-To examine the potential risk of a sharknado, we compute the probability of such an event occurring. From the perspective of any tornado occurring in the United States, this probability can be expressed as the product of several individual probabilities: $$
-P(\text{sharknado}) = 
-P(\text{shark is present}) \times 
-P(\text{tornado is coastal to inland}) \times 
-P(\text{tornado is strong enough to lift a shark})
-$$ Alternatively, if we focus specifically on tornadoes that are coastal-to-inland, the probability of a sharknado occurring conditional on this event can be written as:
+## Probability And Classification Layout
+
+To examine the potential risk of a sharknado, we compute the probability of such an event occurring. From the perspective of any tornado occurring in the United States, this probability can be expressed as the product of several individual probabilities: 
 
 $$
-P(\text{sharknado | tornado is coastal to inland}) = 
-P(\text{shark is present}) \times 
-P(\text{tornado is strong enough to lift a shark | tornado is coastal to inland})
-$$ 
+\begin{gathered}
+P(\text{sharknado}) = P(\text{shark is present}) \times \\
+P(\text{tornado is coastal to inland}) \times
+P(\text{tornado is strong enough to lift a shark})
+\end{gathered}
+$$
+
+Alternatively, if we focus specifically on tornadoes that are coastal-to-inland, the probability of a sharknado occurring conditional on this event can be written as:
+
+$$
+\begin{gathered}
+P(\text{sharknado} \mid \text{tornado is coastal to inland}) = P(\text{shark is present}) \times \\
+P(\text{tornado is strong enough to lift a shark} \mid \text{tornado is coastal to inland})
+\end{gathered}
+$$
 
 The latter case is likely the better answer to our question, as we are worried about the possibility of sharknados occurring when there is a coastal to inland tornado, not when there is a tornado anywhere. As such, the following analysis will focus on this conditional framework.
 
@@ -255,69 +285,19 @@ To begin, we classify each tornado as coastal-to-inland, inland-to-coastal, or n
 
 The classification threshold for “coastal-to-inland” tornadoes requires that the tornado’s starting location be within 10,000 meters of the nearest coast and that its ending location be farther from the coast than its starting location. Similarly, tornadoes are classified as “inland-to-coastal” if their starting location is more than 10,000 meters from the nearest coast and their ending location is closer to the coast than their starting location.
 
-::: callout
-how are you determining which direction from the coast? away from the coast could mean going into the ocean rather than on land
-:::
-
 | **Tornado Type** | **Starting Distance from Coast** | **Ending Distance from Coast** | **Criteria** |
 |------------------|-------------------|------------------|------------------|
 | Coastal → Inland | ≤ 10,000 m | \> Starting distance | Moves away from coast |
 | Inland → Coastal | \> 10,000 m | \< Starting distance | Moves toward coast |
 | Other | Could be either | Could be either | Doesn’t meet the 2 criteria for either group |
 
-::: {style="text-align:center;"}
+@fig-usmap shows an example of coastal-to-inland vs inland-to-coastal tornados
 
-<img src="usmap_with_vectors.jpg" width="500"/>
+::: {#fig-usmap fig-align="center"}
 
-<br>
+![](usmap_with_vectors.jpg){width=500}
 
-<span style="color:red;">Coastal to Inland</span> |
+<span style="color:red;">Coastal to Inland</span> | 
 <span style="color:blue;">Inland to Coastal</span>
 
 :::
-
-::: callout
-include transition into the next section
-
-also, overall would like to see some outside research on methods and why selecting this one
-:::
-
-
-
-
-
-
-```{r}
-florida_tornado <- tornado_paths |>
-  filter(mag == 4 & movement == "Coastal_to_Inland")
-
-florida <- map_data("state") |>
-  filter(region == "florida")
-
-ggplot() +
-  geom_polygon(
-    data = florida,
-    aes(x = long, y = lat, group = group),
-    fill = NA,
-    color = "black",
-    linewidth = 0.3
-  ) +
-  geom_point(
-    data = florida_tornado,
-    aes(x = slon, y = slat),
-    color = "red",
-    size = 3
-  ) +
-  geom_point(
-    data = florida_tornado,
-    aes(x = elon, y = elat),
-    color = "blue",
-    size = 3
-  ) +
-  labs(
-    title = "Only Possible Sharknado Tornado Found",
-    x = "Longitude",
-    y = "Latitude"
-  )
-```
-

@@ -1,49 +1,186 @@
-# Preface
-
-You are a data scientist for a mid-sized business, in a small group of 3-4 data scientists. You've been tasked with creating a report evaluating a scenario for your business. 
-Your colleagues will also be evaluating the same scenario, and your reports will be used in aggregate to determine a consensus (or lack thereof) on the company's action. 
-The reports will also be used to inform downsizing that is rumored to be coming - you want to ensure your report is better than your peers so that you aren't as easy to cut. 
-
-You may talk to your peers who are assigned the same scenario, but you do not want to collaborate too closely, lest you both become targets of the rumored layoffs. 
-
-
+---
+title: "Executive Summary"
+format: html
 ---
 
-I've scaffolded this report for you to make this process easier - as we talk about different sections of a report in class and read about how to create similar sections, you will practice by writing the equivalent section of your report.
+This report estimates the probability of a “sharknado” by incorporating real-world constraints and combining the probabilities of the events required for such an occurrence. Using available tornado data and reasonable assumptions, the analysis evaluates the likelihood of three key components:
+
+1)  The presence of a shark on the coast
+2)  A tornado moving coastal to inland
+3)  A tornado is strong enough to lift and move a shark inland
+
+The analysis sequences the relevant probabilities to estimate the overall likelihood. A key assumption is that sharks are always present when a coastal-to-inland tornado occurs, which intentionally overestimates the probability and provides a conservative upper bound. The results indicate that, even under favorable assumptions, the probability of a sharknado is effectively zero. Only one tornado since 1950 shows the possibility of being a sharknado, an EF4 tornado from Florida in 1966.
 
 
-The basic steps for this task are as follows:
+```{r, echo = FALSE, message = FALSE, output = FALSE}
+library(gt)
 
-- Identify the research question from the business question
+tornado_vars <- data.frame(
+  Variable = c("yr", "date", "st", "mag", "slat", "slon", "elat", "elon", "len", "wid"),
+  Description = c(
+    "Year Tornado Occurred",
+    "Exact Date Tornado Occurred",
+    "State Abbreviation Where Tornado First Touched Down",
+    "EF Scale Magnitude of the Tornado",
+    "Latitude Where the Tornado First Touched Down",
+    "Longitude Where the Tornado First Touched Down",
+    "Latitude Where the Tornado Ended",
+    "Longitude Where the Tornado Ended",
+    "Tornado Path Length (Miles)",
+    "Tornado Path Width (Yards)"
+  ),
+  Type = c("Integer", "Date", "Categorical", "Integer", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric", "Numeric"),
+  Possible_Values = c("1950-2024", "01-01-1950 to 12/31/2024", "Any US State", "0-5 or -9 Meaning Unknown", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "US Latitudes ~ 29 to 50", "US Longitudes ~ -125 to -70", "0-250 Miles", "0-3500 Yards")
+)
 
-- Identify data set(s) which are (1) publicly available (you don't have a budget to pay for private data) and (2) relevant to your task
+tornado_vars %>%
+  gt() %>%
+  tab_header(
+    title = "Tornado Data Variable Descriptions"
+  ) %>%
+  cols_label(
+    Variable = "Variable Name",
+    Description = "Description",
+    Type = "Type",
+    Possible_Values = "Possible Values"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_body(everything())
+  ) %>%
+  tab_style(
+    style = cell_borders(
+      sides = "all",
+      color = "black",
+      weight = px(1)
+    ),
+    locations = cells_column_labels(everything())
+  )
+# Data Cleaning (1 row per tornado, only important columns, dealing with 0's in elat and elon)
+library(tidyverse)
 
-    - (HW Week 6) Document your data sets in `draft-data-doc.qmd`
+tornado_full_data <- read.csv("1950-2024_actual_tornadoes.csv") |>
+  filter(!st %in% c("AK", "HI", "PR", "VI"))
 
-- Conduct a statistical analysis to support your answer to your research and business questions
+tornado_paths <- tornado_full_data |>
+  distinct(slat, slon, elat, elon, .keep_all = TRUE)
 
-    - Write a methods section for your business report corresponding to your statistical analysis
+tornado_paths <- tornado_paths |>
+  select(slat, slon, elat, elon, mag)
 
-    - (HW Week 9) Draft of results section of business report with relevant graphics/visual aids in `draft-results.qmd`
-    
-- Write your report
+tornado_paths <- tornado_paths |>
+  mutate(end_missing = (elat == 0 | elon == 0))
 
-    - (HW Week 10) Draft of Intro/Conclusion sections in `draft-intro-conclusions.qmd`
-    
-    - (HW Week 11) Draft of Executive summary section in `draft-exec-summary.qmd`
-    
-- Revise your report
+ggplot(tornado_paths, aes(x = slon, y = slat)) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(title = "Starting Location For All Tornadoes",
+       x = "Starting Longitude", y = "Starting Latitude") +
+  theme_minimal()
+ggplot(tornado_paths |> filter(elat == 0 | elon == 0),
+       aes(x = slon, y = slat)) +
+  geom_point(color = "red", alpha = 0.5) +
+  labs(title = "Starting Location For Tornadoes With Missing End Coordinates",
+       x = "Starting Longitude", y = "Starting Latitude") +
+  theme_minimal()
+library(ggtext)
+ggplot(
+  tornado_paths |> 
+    filter(elat == 0 | elon == 0),
+  aes(x = slon, y = slat)
+) +
+  geom_point(color = "red", alpha = 0.5) +
+  facet_wrap(~ mag) +
+  labs(
+    title = "Starting Location For Tornadoes With Missing End Coordinates (by Magnitude)",
+    x = "Starting Longitude", 
+    y = "Starting Latitude"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_markdown()
+  )
+# Transforming latitude and longitude into math ready quantities
+library(rnaturalearth)
+library(sf)
 
-    - (HW Week 12 -- not turned in) Revise your report
-    
-    - (HW Week 13) - Rough draft of report due. Create one or more qmd files for your report (you can overwrite or delete intro.qmd and summary.qmd), include the names of each file (in order) in `_quarto.yml`. You should use references (edit references.bib and use pandoc citations). Make sure your report compiles and looks reasonable in both html and pdf. 
-    
-    - Develop a presentation to go along with your report (Week 13). Create slides for your report using quarto. 
+tornado_paths <- tornado_paths |>
+  filter(end_missing == FALSE)
 
-- Peer revise reports
+tornado_paths$start_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("slon", "slat"),
+  crs = 4269
+)$geometry
 
-    - Peer revise reports
-    
-    - (HW Week 14) - Make edits to your report from comments received from peer review
+tornado_paths$end_geom_degrees <- st_as_sf(
+  tornado_paths,
+  coords = c("elon", "elat"),
+  crs = 4269
+)$geometry
 
-- Final report & presentation due
+tornado_paths$start_geom_meters <- st_transform(
+  tornado_paths$start_geom_degrees, 5070
+)
+
+tornado_paths$end_geom_meters <- st_transform(
+  tornado_paths$end_geom_degrees, 5070
+)
+
+coast_m <- ne_coastline(returnclass = "sf") |> 
+  st_transform(5070)
+# Find distances to coast and classify each tornado as coastal_to_inland , inland_to_coastal , or other
+tornado_paths <- tornado_paths |>
+  mutate(
+    dist_start_to_coast = st_distance(start_geom_meters, coast_m) |> apply(1, min),
+    dist_end_to_coast = st_distance(end_geom_meters, coast_m) |> apply(1, min)
+  )
+
+tornado_paths <- tornado_paths |> 
+  mutate(  
+    movement = case_when(  
+      dist_start_to_coast <= 10000 & dist_end_to_coast > dist_start_to_coast ~ "Coastal_to_Inland",  
+      dist_start_to_coast > 10000 & dist_end_to_coast < dist_start_to_coast ~ "Inland_to_Coastal",  
+      TRUE ~ "Other"  
+    )  
+  )
+```
+
+```{r, echo = FALSE}
+florida_tornado <- tornado_paths |>
+  filter(mag == 4 & movement == "Coastal_to_Inland")
+
+florida <- map_data("state") |>
+  filter(region == "florida")
+
+ggplot() +
+  geom_polygon(
+    data = florida,
+    aes(x = long, y = lat, group = group),
+    fill = NA,
+    color = "black",
+    linewidth = 0.3
+  ) +
+  geom_point(
+    data = florida_tornado,
+    aes(x = slon, y = slat),
+    color = "red",
+    size = 3
+  ) +
+  labs(
+    title = "Only Possible Sharknado Found",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+::: callout-important
+The probability of a sharknado is effectively zero. As such, no adjustments to insurance products are warranted. Resources should instead focus on higher-probability catastrophic events such as hurricanes and standard tornadoes.
+:::

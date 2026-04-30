@@ -3,6 +3,17 @@ title: "Sharknado Probability Risk Analysis"
 author: "Tyler Brown"
 format: revealjs
 ---
+## Introduction of the Situation {.smaller}
+
+- The movie "Sharknado" is a obviously fictional
+
+- Can we estimate the likelihood of a sharknado happening with some realistic environmental constraints?
+
+- Determine if sharknados are simply a product of fiction, or if they have a possibility of happening in real life
+
+![](sharknado_poster.jpg){fig-align="center"}
+
+---
 
 ## What Data Was Used? {.smaller}
 
@@ -64,11 +75,15 @@ tornado_vars %>%
   )
 ```
 
+---
+
 ## Missing Values {.smaller}
 
 - NOAA data set has many "0" values for the ending latitudes and longitudes that are really NA's
 
 ![](0_latitude_0_longitude_picture.jpg)
+
+---
 
 ## Missing Values cont. {.smaller}
 
@@ -128,6 +143,8 @@ ggplot() +
 
 :::
 
+---
+
 ## Missing Values cont. {.smaller}
 
 ::: columns
@@ -180,6 +197,8 @@ ggplot() +
 
 :::
 
+---
+
 ## How Will a Probability Be Computed? {.smaller}
 
 
@@ -200,6 +219,8 @@ $$
 | Inland → Coastal | \> 10,000 m | \< Starting distance | Moves toward coast |
 | Other | Could be either | Could be either | Doesn’t meet the 2 criteria for either group |
 
+---
+
 ## <span style="font-size: 0.89em;">How Will a Probability Be Computed? cont.</span>
 
 ::: {style="text-align:center;"}
@@ -213,6 +234,7 @@ $$
 
 :::
 
+---
 
 ## Probabilities of Each Type of Tornado {.smaller}
 
@@ -303,6 +325,8 @@ kable(
 
 - less amount of land close to the coast when compared to the interior of the country
 
+---
+
 ## Assumptions for EF magnitude Needed For Sharknado {.smaller}
 
 - Great White Sharks can weigh up to 4,500 lbs
@@ -326,6 +350,8 @@ kable(
 :::
 
 :::
+
+---
 
 ## Probability of a Sharknado {.smaller}
 
@@ -356,30 +382,14 @@ ggplot() +
     color = "red",
     size = 3
   ) +
-  geom_point(
-    data = florida_tornado,
-    aes(x = elon, y = elat),
-    color = "blue",
-    size = 3
-  ) +
-    geom_text(
-    data = florida_tornado,
-    aes(x = slon, y = slat, label = "Start"),
-    vjust = -1,
-    color = "red"
-  ) +
-  geom_text(
-    data = florida_tornado,
-    aes(x = elon, y = elat, label = "End"),
-    vjust = -1,
-    color = "blue"
-  ) +
   labs(
-    title = "Only Possible Sharknado Tornado Found",
+    title = "Only Possible Sharknado Found",
     x = "Longitude",
     y = "Latitude"
   )
 ```
+
+---
 
 ## Conclusion {.smaller}
 
@@ -389,7 +399,7 @@ ggplot() +
 
 - Analysis could be improved with the distribution of shark locations and physics based modeling of wind speeds required to lift sharks out of the water 
 
-- no adjustment to insurance products is needed and time and resources should be spent on other more likely natural disasters
+- No adjustment to insurance products is needed and time and resources should be spent on other more likely natural disasters
 
 
 

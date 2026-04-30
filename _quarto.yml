@@ -9,12 +9,11 @@ book:
     left: "Copyright 2026, Tyler Brown"
   chapters:
     - index.qmd
-    - executive_summary.qmd
     - intro.qmd
     - methods.qmd
     - results.qmd
     - conclusion.qmd
-    - presentation_slides.qmd
+    - references.qmd
   appendices:
     - draft-data-doc.qmd
     - draft-results.qmd
